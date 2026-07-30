@@ -2,4 +2,4 @@
 
 Készítette: Freud Andrea
 
-Tesztel webalkalmazás: https://demo.nopcommerce.com/
+Tesztelt webalkalmazás: [https://demo.nopcommerce.com/](https://demo.nopcommerce.com/)
