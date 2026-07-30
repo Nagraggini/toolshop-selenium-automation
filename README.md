@@ -2,4 +2,10 @@
 
 Készítette: Freud Andrea
 
-Tesztel webalkalmazás: https://demo.nopcommerce.com/
+Tesztelt webalkalmazás: [https://practicesoftwaretesting.com/](https://practicesoftwaretesting.com/)
+
+Futattás:
+linux-on: `./mvnw clean test`
+
+win-on: `mvnw clean test`
+

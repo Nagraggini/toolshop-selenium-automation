@@ -17,7 +17,9 @@ Adatok lementése felületről
 Kijelentkezés
 
 A vizsgaremek benyújtásának módja:
-A kész csomagot a vizsga előtt minimum 7 nappal kell a vizsgabizottsághoz benyújtani GitHub vagy más hasonló szolgáltatás segítségével megosztva. A megosztott anyagnak tartalmaznia kell az alábbiakat:
+A kész csomagot a vizsga előtt minimum 7 nappal kell a vizsgabizottsághoz benyújtani GitHub vagy más hasonló szolgáltatás segítségével megosztva. 
+
+A megosztott anyagnak tartalmaznia kell az alábbiakat:
 
 A tesztek forráskódja
 A tesztelt alkalmazás elérési helye (GitHub vagy hasonló) és üzembehelyezési módja (Readme.MD vagy más dokumentáció az alkalmazás telepítése / elindítási módja)
