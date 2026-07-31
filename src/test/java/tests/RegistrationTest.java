@@ -14,7 +14,7 @@ import pages.RegisterPage;
 class RegistrationTest extends BaseTest {
 
 	/**
-	 * Sikeres regisztráció ellenőrzése.
+	 * TC 1.1 Sikeres regisztráció ellenőrzése.
 	 */
 	@Test
 	void successfulRegistrationTest() {		
