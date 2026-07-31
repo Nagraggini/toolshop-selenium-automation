@@ -23,7 +23,7 @@ public class HomePage extends BasePage{
 	 * Megnyitja a weboldalt.
 	 */
 	public void open() {		
-		driver.get("https://demo.nopcommerce.com/");		
+		driver.get("https://practicesoftwaretesting.com/");		
 	}
 	
 	public RegisterPage clickRegister() {
