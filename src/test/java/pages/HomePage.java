@@ -6,33 +6,26 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasePage{
 
-	private final By pageTitle = By.cssSelector(".topic-block-title h2");
-
-	private final By registerBtn = By.cssSelector(".ico-register");
-	private final By loginBtn = By.cssSelector(".ico-login");
-	private final By wishlistBtn = By.cssSelector(".wishlist-label");
-	private final By shoppingCartBtn = By.cssSelector(".cart-label");
+	private final By pageLogo = By.cssSelector("a.navbar-brand");
+	
+	private final By sigInBtn = By.cssSelector("[data-test='nav-sign-in']");	
 	
 	public HomePage(WebDriver driver) {
-		super(driver);	
-		// Validáljuk, hogy betöltött-e az oldal. Oldal szintű várakoztatás.
-		wait.until(ExpectedConditions.textToBe(pageTitle,"Welcome to our store"));
+		super(driver);			
 	}
 	
 	/**
 	 * Megnyitja a weboldalt.
 	 */
 	public void open() {		
-		driver.get("https://practicesoftwaretesting.com/");		
+		driver.get("https://practicesoftwaretesting.com/");	
+		// Validáljuk, hogy betöltött-e az oldal. Oldal szintű várakoztatás.
+		wait.until(ExpectedConditions.visibilityOfElementLocated(pageLogo));
 	}
 	
-	public RegisterPage clickRegister() {
-	    click(registerBtn);
-	    return new RegisterPage(driver);
-	}
-
-	public LoginPage clickLogin() {
-	    click(loginBtn);
+	public LoginPage clickSignIn() {	
+	    click(sigInBtn);
 	    return new LoginPage(driver);
-	}
+	}	
+	
 }

@@ -3,80 +3,109 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 public class RegisterPage extends BasePage {
 
-	private final By pageTitle = By.cssSelector(".page-title h1");
+	private final By pageTitle = By.xpath("//h3[normalize-space()='Customer registration']");
+	
+	// Adat mezők
+	private final By firstNameInput = By.cssSelector("[data-test='first-name']");
+	private final By lastNameInput = By.cssSelector("[data-test='last-name']");
+	private final By dateOfBirthInput = By.cssSelector("[data-test='dob']");
+	private final By streetInput = By.cssSelector("[data-test='street']");
+	private final By houseNumberInput = By.cssSelector("[data-test='house_number']");
+	private final By postalCodeInput = By.cssSelector("[data-test='postal_code']");
+	private final By cityInput = By.cssSelector("[data-test='city']");
+	private final By stateInput = By.cssSelector("[data-test='state']");
+	private final By countrySelect = By.cssSelector("[data-test='country']");
+	private final By phoneInput = By.cssSelector("[data-test='phone']");
+	private final By emailInput = By.cssSelector("[data-test='email']");
+	private final By passwordInput = By.cssSelector("[data-test='password']");
 
-	// Gender
-	private final By genderMale = By.id("gender-male");
-	private final By genderFemale = By.id("gender-female");
-
-	// Személyes adatok
-	private final By firstName = By.id("FirstName");
-	private final By lastName = By.id("LastName");
-	private final By email = By.id("Email");
-
-	// Cég adatok
-	private final By company = By.id("Company");
-
-	// Újdonságok
-	private final By newsletter = By.id("Newsletter");
-
-	// Jelszavak
-	private final By password = By.id("Password");
-	private final By confirmPassword = By.id("ConfirmPassword");
-
-	// Hibaüzenet, ha nincs kitöltve a jelszó mező.
-	private final By passwordErrorMessage=By.id("ConfirmPassword-error");
 	
 	// Regisztrációs gomb
-	private final By registerButton = By.id("register-button");
+	private final By registerButton = By.cssSelector("[data-test='register-submit']");
 	
 	public RegisterPage(WebDriver driver) {
 		super(driver);
-		wait.until(ExpectedConditions.textToBe(pageTitle, "Register"));
+		wait.until(ExpectedConditions.textToBe(pageTitle, "Customer registration"));
 	}
 
-	public RegisterPage selectMaleGender() {
-		click(genderMale);
-		return this;
-	}
+	 public RegisterPage fillFirstName(String firstName) {
+	        driver.findElement(firstNameInput).sendKeys(firstName);
+	        return this;
+	    }
 
-	public RegisterPage selectFemaleGender() {
-		click(genderFemale);
-		return this;
-	}
-	
-	public RegisterPage fillFirstName(String value) {
-		type(firstName, value);
-		return this;
-	}
 
-	public RegisterPage fillLastName(String value) {
-		type(lastName, value);
-		return this;
-	}
+	    public RegisterPage fillLastName(String lastName) {
+	        driver.findElement(lastNameInput).sendKeys(lastName);
+	        return this;
+	    }
 
-	public RegisterPage fillEmail(String value) {
-		type(email, value);
-		return this;
-	}
 
-	// Mindkét jelszó mezőt kitölti.
-	public RegisterPage fillPassword(String value) {
-		type(password, value);
-		type(confirmPassword, value);
-		return this;
-	}
-	
-	// Password is required.
-	public String getMissingPasswordErrorMessage() {
-			return getText(passwordErrorMessage);
-	}
-		
-	public RegisterResultPage clickRegistration() {
-		click(registerButton);
-		return new RegisterResultPage(driver);		
-	}
+	    public RegisterPage fillDateOfBirth(String dateOfBirth) {
+	        driver.findElement(dateOfBirthInput).sendKeys(dateOfBirth);
+	        return this;
+	    }
+
+
+	    public RegisterPage fillStreet(String street) {
+	        driver.findElement(streetInput).sendKeys(street);
+	        return this;
+	    }
+	    
+	    public RegisterPage fillHouseNumber(String number) {
+	        driver.findElement(houseNumberInput).sendKeys(number);
+	        return this;
+	    }
+
+
+	    public RegisterPage fillPostalCode(String postalCode) {
+	        driver.findElement(postalCodeInput).sendKeys(postalCode);
+	        return this;
+	    }
+
+
+	    public RegisterPage fillCity(String city) {
+	        driver.findElement(cityInput).sendKeys(city);
+	        return this;
+	    }
+
+
+	    public RegisterPage fillState(String state) {
+	        driver.findElement(stateInput).sendKeys(state);
+	        return this;
+	    }
+
+
+	    public RegisterPage selectCountry(String country) {
+	        Select select = new Select(driver.findElement(countrySelect));
+	        select.selectByVisibleText(country);
+	        return this;
+	    }
+
+
+	    public RegisterPage fillPhone(String phone) {
+	        driver.findElement(phoneInput).sendKeys(phone);
+	        return this;
+	    }
+
+
+	    public RegisterPage fillEmail(String email) {
+	        driver.findElement(emailInput).sendKeys(email);
+	        return this;
+	    }
+
+
+	    public RegisterPage fillPassword(String password) {
+	        driver.findElement(passwordInput).sendKeys(password);
+	        return this;
+	    }
+
+
+	    public LoginPage clickRegister() {
+	        driver.findElement(registerButton).click();
+	        return new LoginPage(driver);
+	    }
 }
