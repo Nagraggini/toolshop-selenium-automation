@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import driver.DriverFactory;
 import pages.HomePage;
+import utils.TestData;
 
 public class BaseTest {
 
@@ -22,6 +23,7 @@ public class BaseTest {
 	protected static final Logger logger = LogManager.getLogger(BaseTest.class);
 	
 	protected HomePage homePage;
+	protected TestData testData=new TestData();
 
 	@BeforeEach
 	void setUp() {		
