@@ -27,6 +27,9 @@ public class RegisterPage extends BasePage {
 	// Regisztrációs gomb
 	private final By registerButton = By.cssSelector("[data-test='register-submit']");
 	
+	// Hiányzó keresztnév hibaüzenet
+	private final By firstNameErrorMessage = By.cssSelector("[data-test='first-name-error']");
+	
 	public RegisterPage(WebDriver driver) {
 		super(driver);
 		wait.until(ExpectedConditions.textToBe(pageTitle, "Customer registration"));
@@ -107,5 +110,15 @@ public class RegisterPage extends BasePage {
 	    public LoginPage clickRegister() {
 	        driver.findElement(registerButton).click();
 	        return new LoginPage(driver);
+	    }
+	    
+	    public RegisterPage clickRegisterWithoutFluentPOM() {
+	        driver.findElement(registerButton).click();
+	        return new RegisterPage(driver);
+	    }
+	    
+	    // First name is required
+	    public String getMissingFirstNameErrorMessage(String errorMessage) {
+	    	return getText(firstNameErrorMessage);	        
 	    }
 }

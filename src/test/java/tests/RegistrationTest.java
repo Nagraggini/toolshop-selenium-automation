@@ -14,16 +14,10 @@ import pages.RegisterPage;
 class RegistrationTest extends BaseTest {
 
 	/**
-	 * TC 1.1 Sikeres regisztráció ellenőrzése.
+	 * TC01 Sikeres regisztráció ellenőrzése.
 	 */
 	@Test
-	void successfulRegistrationTest() {		
-		/*assertEquals("Your registration completed",homePage.clickRegister()
-				.selectMaleGender()
-				.fillFirstName(TestData.generateFirstName())
-				.fillLastName(TestData.generateLastName())
-				.fillEmail(TestData.generateEmail())
-				.fillPassword(TestData.generatePassword()).clickRegistration().getResult());*/
+	void successfulRegistrationTest() {			
 		
 		assertEquals("Here you can manage your profile, favorites and orders.",homePage.clickSignIn()
         .clickRegister()
@@ -41,6 +35,26 @@ class RegistrationTest extends BaseTest {
         .fillPassword(testData.getPassword()).clickLogin().getWelcomeMessage());
 		
 		// Pár perc múlva automatikusan törli az oldal a felhasználót.
+	}
+	
+	/**
+	 * TC02 Sikertelen regisztráció ellenőrzése.
+	 */
+	@Test
+	void unsuccessfulRegistrationTest() {			
+		
+		assertEquals("First name is required",homePage.clickSignIn()
+        .clickRegister()
+        .fillLastName(testData.getLastName())
+        .fillDateOfBirth("1990-01-01")
+        .fillHouseNumber("10")
+        .fillPostalCode("12345")
+        .selectCountry("Hungary")
+        .fillPhone("301234567")
+        .fillEmail(testData.getEmail())
+        .fillPassword(testData.getPassword())
+        .clickRegisterWithoutFluentPOM().getMissingFirstNameErrorMessage(null));	
+	
 	}
 	
 
