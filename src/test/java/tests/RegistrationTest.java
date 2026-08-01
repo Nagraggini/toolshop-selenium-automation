@@ -19,7 +19,8 @@ class RegistrationTest extends BaseTest {
 	@Test
 	void successfulRegistrationTest() {			
 		
-		assertEquals("Here you can manage your profile, favorites and orders.",homePage.clickSignIn()
+		assertEquals("Here you can manage your profile, favorites and orders."
+		,homePage.clickSignIn()
         .clickRegister()
         .fillFirstName(testData.getFirstName())
         .fillLastName(testData.getLastName())
@@ -34,7 +35,7 @@ class RegistrationTest extends BaseTest {
         .fillEmail(testData.getEmail())
         .fillPassword(testData.getPassword()).clickLogin().getWelcomeMessage());
 		
-		// Pár perc múlva automatikusan törli az oldal a felhasználót.
+		// Pár perc múlva automatikusan törli az oldal az új felhasználót.
 	}
 	
 	/**

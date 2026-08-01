@@ -7,6 +7,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class AccountPage extends BasePage {
 
 	private final By pageTitle = By.cssSelector("[data-test='page-title']");
+	
+	// Itt látható a felhasználó teljes neve.
+	private final By navMenuBtn = By.cssSelector("[data-test='nav-menu']");	
+	
 	private final By welcomeMessage = By.xpath("//p[contains(text(),'profile')]");
 	
 	public AccountPage(WebDriver driver) {
@@ -17,6 +21,11 @@ public class AccountPage extends BasePage {
 	// Here you can manage your profile, favorites and orders.
 	public String getWelcomeMessage() {
 		return getText(welcomeMessage);
+	}
+	
+	// Itt látható a felhasználó teljes neve.
+	public String getUserFullName() {
+		return getText(navMenuBtn);
 	}
 			
 
