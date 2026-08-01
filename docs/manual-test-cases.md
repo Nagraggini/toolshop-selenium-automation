@@ -21,10 +21,12 @@
 A dokumentum tartalmazza azokat a manuális teszteseteket,
 amelyek alapján az automatizált Selenium tesztek elkészültek.
 
+Az alábbiakban részletesen, a vizsgaremek követelményeihez igazítva összegyűjtöttem a lépéseket és a teszteseteket a Practice Software Testing - Toolshop ([https://practicesoftwaretesting.com/](https://practicesoftwaretesting.com/)) webalkalmazáshoz, amely minden kötelező funkciót lefed.
+
 ## TC01
 
 Regisztráció
-Cél: Új felhasználói fiók sikeres létrehozása.
+Teszt rövid leírása: Új felhasználói fiók sikeres létrehozása.
 
 Teszt lépések:
 
@@ -32,7 +34,7 @@ Navigáció a [https://practicesoftwaretesting.com/](https://practicesoftwaretes
 
 Kattintás a jobb felső sarokban található hamburger ikonra aztán a "Sign in" linkre, majd a regisztrációs opció kiválasztása az alul lévő "Register your account" gomb segítségével.
 
-A regisztrációs űrlap kitöltése érvényes adatokkal:
+A regisztrációs űrlap kitöltése random adatokkal:
 
 - Keresztnév és vezetéknév (First name, Last name)
 - Születési dátum (Date of birth)
@@ -46,7 +48,7 @@ A "Register" gombra kattintás.
 
 A rendszer sikeresen regisztrálja a felhasználót, és átirányít a bejelentkezési oldalra.
 
-Bejelentkezünk az oldalra.
+Bejelentkezünk az oldalra az újonnan regisztrált email címmel és jelszóval.
 
 Elvárt eredmény: A sikeres bejelentkezés után megjelenik az üdvözlő üzenet, melynek ez a tartalma: 
 "Here you can manage your profile, favorites and orders."
@@ -54,7 +56,7 @@ Elvárt eredmény: A sikeres bejelentkezés után megjelenik az üdvözlő üzen
 ## TC02
 
 Regisztráció
-Cél: Új felhasználói fiók sikertelen létrehozása.
+Teszt rövid leírása: Új felhasználói fiók sikertelen létrehozása.
 
 Teszt lépések:
 
@@ -64,7 +66,7 @@ Kattintás a jobb felső sarokban található hamburger ikonra aztán a "Sign in
 
 Keresztnév mezőt direkt üresen hagyjuk (First name)
 
-A regisztrációs űrlap kitöltése érvényes adatokkal kivéve a keresztnév mezőt:
+A regisztrációs űrlap kitöltése random adatokkal kivéve a keresztnév mezőt:
 
 - Vezetéknév (Last name)
 - Születési dátum (Date of birth)
@@ -78,9 +80,38 @@ A "Register" gombra kattintás.
 
 A rendszer kiírja, hogy sikertelen a regisztráció.
 
-
 Elvárt eredmény: Sikertelen a regisztráció és a keresztnév alatt megjelenik egy hibaüzenet: 
 "First name is required"
 
+## TC03
 
+Bejelentkezés
+Teszt rövid leírása: A regisztrált fiókkal való sikeres belépés.
 
+Teszt lépések:
+
+Navigáció a [https://practicesoftwaretesting.com/](https://practicesoftwaretesting.com/) weboldalra.
+
+Kattintás a jobb felső sarokban található hamburger ikonra aztán a "Sign in" linkre.
+
+Az email cím és a jelszó megadása az "Email address" és a "Password" mezőkben.
+A teszt felhasználó adatai a gyökér könyvtárban lévő .env fájlban találhatóak.
+
+A "Login" gombra kattintás.
+
+Elvárt eredmény: A felhasználó sikeresen belép, a felül a hamburger ikonra kattintás után megjelenik a felhasználó teljes neve.
+
+## TC04
+
+Adatkezelési nyilatkozat használata
+Teszt rövid leírása: Az adatvédelmi / ÁSZF / jogi nyilatkozat elérhetőségének és tartalmának validálása.
+
+Teszt lépések:
+
+Navigáció a [https://practicesoftwaretesting.com/](https://practicesoftwaretesting.com/) weboldalra.
+
+Az oldal láblécében (footer) található "Privacy Policy" gombra kattintás.
+
+Megjelenik az adatvédelmi nyilatkozat, melynek a tartalmát ellenőrizzük, hogy megtalálhatóak-e benne a kulcsszavak: "Data Removal", "Data Security"
+
+Elvárt eredmény: Az adatkezelési nyilatkozat oldala hibátlanul betöltődik, és a kötelező jogi szöveg megjelenik a felületen ("Data Removal", "Data Security").

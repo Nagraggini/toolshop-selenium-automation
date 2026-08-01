@@ -1,14 +1,10 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import base.BaseTest;
-import utils.TestData;
-import pages.HomePage;
-import pages.RegisterPage;
 
 // Selenium Page Object Model + Fluent Page Chaining
 class RegistrationTest extends BaseTest {
