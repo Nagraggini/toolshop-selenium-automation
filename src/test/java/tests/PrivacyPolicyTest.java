@@ -1,11 +1,11 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import base.BaseTest;
-import utils.ConfigReader;
 
 class PrivacyPolicyTest extends BaseTest {
 
@@ -13,7 +13,8 @@ class PrivacyPolicyTest extends BaseTest {
 	 * TC04 Adatkezelési nyilatkozat használata.
 	 */
 	@Test
-	void usePrivacyPolicyTest() {		
+	@DisplayName("TC04 - Adatkezelési nyilatkozat megnyitása és tartalmának ellenőrzése.")
+	void checkPrivacyPolicyContainsTwoWordsTest() {	
 		assertTrue(homePage.clickPrivacyPolicyLink()
 				.verifyTwoWordsInPrivacyText("Data Removal", "Data Security"));
 	}

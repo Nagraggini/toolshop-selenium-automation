@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import base.BaseTest;
@@ -13,6 +14,7 @@ class RegistrationTest extends BaseTest {
 	 * TC01 Sikeres regisztráció ellenőrzése.
 	 */
 	@Test
+	@DisplayName("TC01 - Sikeres regisztráció és bejelentkezés ellenőrzése.")	
 	void successfulRegistrationTest() {			
 		
 		assertEquals("Here you can manage your profile, favorites and orders."
@@ -38,6 +40,7 @@ class RegistrationTest extends BaseTest {
 	 * TC02 Sikertelen regisztráció ellenőrzése.
 	 */
 	@Test
+	@DisplayName("TC02 - Sikertelen regisztráció kötelező keresztnév hiánya miatt.")
 	void unsuccessfulRegistrationTest() {			
 		
 		assertEquals("First name is required",homePage.clickSignIn()
