@@ -1,6 +1,6 @@
 package utils;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 public class TestData {
 
@@ -9,6 +9,14 @@ public class TestData {
     private final String firstName;
     private final String lastName;
 
+    // Karakter készletek konstansként definiálva
+    private static final String UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
+    private static final String NUMBERS = "0123456789";
+    private static final String SPECIAL = "@#$%&*!";
+    
+    private static final SecureRandom random = new SecureRandom();
+    
     public TestData() {
         this.email = generateEmail();
         this.password = generateRandomPassword();
@@ -16,37 +24,42 @@ public class TestData {
         this.lastName = "Smith";
     }
 
-    private String generateEmail() {
-        return "test" + System.currentTimeMillis() + "@test.com";
+    /**
+     * Általános metódus karakterek véletlenszerű generálására megadott karakterkészletből.
+     */
+    private static String generateRandomString(String characterPool, int length) {
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            sb.append(characterPool.charAt(random.nextInt(characterPool.length())));
+        }
+        return sb.toString();
+    }
+
+    public static String generateEmail() {
+        String allCharacters = UPPERCASE + LOWERCASE + NUMBERS;
+
+        // Kötelező karakterek + maradék a 8 karakterhez (4 karakter generálása)
+        StringBuilder emailBuilder = new StringBuilder();
+        emailBuilder.append(UPPERCASE.charAt(random.nextInt(UPPERCASE.length())));
+        emailBuilder.append(LOWERCASE.charAt(random.nextInt(LOWERCASE.length())));
+        emailBuilder.append(NUMBERS.charAt(random.nextInt(NUMBERS.length())));
+        emailBuilder.append(generateRandomString(allCharacters, 4));
+
+        return "test" + System.currentTimeMillis() + emailBuilder.toString() + "@test.com";
     }
 
     private String generateRandomPassword() {
+        String allCharacters = UPPERCASE + LOWERCASE + NUMBERS + SPECIAL;
 
-        String uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String lowercase = "abcdefghijklmnopqrstuvwxyz";
-        String numbers = "0123456789";
-        String special = "@#$%&*!";
+        // Kötelező karakterek + maradék a 8 karakterhez (4 karakter generálása)
+        StringBuilder passwordBuilder = new StringBuilder();
+        passwordBuilder.append(UPPERCASE.charAt(random.nextInt(UPPERCASE.length())));
+        passwordBuilder.append(LOWERCASE.charAt(random.nextInt(LOWERCASE.length())));
+        passwordBuilder.append(NUMBERS.charAt(random.nextInt(NUMBERS.length())));
+        passwordBuilder.append(SPECIAL.charAt(random.nextInt(SPECIAL.length())));
+        passwordBuilder.append(generateRandomString(allCharacters, 4));
 
-        String allCharacters = uppercase + lowercase + numbers + special;
-
-        Random random = new Random();
-
-        StringBuilder password = new StringBuilder();
-
-        // Kötelező karakterek
-        password.append(uppercase.charAt(random.nextInt(uppercase.length())));
-        password.append(lowercase.charAt(random.nextInt(lowercase.length())));
-        password.append(numbers.charAt(random.nextInt(numbers.length())));
-        password.append(special.charAt(random.nextInt(special.length())));
-
-        // Minimum 8 karakter
-        for (int i = 4; i < 8; i++) {
-            password.append(
-                allCharacters.charAt(random.nextInt(allCharacters.length()))
-            );
-        }
-
-        return password.toString();
+        return passwordBuilder.toString();
     }
 
 

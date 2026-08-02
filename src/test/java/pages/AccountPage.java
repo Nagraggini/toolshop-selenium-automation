@@ -7,9 +7,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class AccountPage extends BasePage {
 
 	private final By pageTitle = By.cssSelector("[data-test='page-title']");
-	
-	// Itt látható a felhasználó teljes neve.
+			
+	// Itt látható a felhasználó teljes neve. Lenyíló lista.
 	private final By navMenuBtn = By.cssSelector("[data-test='nav-menu']");	
+	
+	private final By signOutBtn = By.cssSelector("[data-test='nav-sign-out']");	
 	
 	private final By welcomeMessage = By.xpath("//p[contains(text(),'profile')]");
 	
@@ -27,6 +29,11 @@ public class AccountPage extends BasePage {
 	public String getUserFullName() {
 		return getText(navMenuBtn);
 	}
-			
+	
+	public LoginPage clickSignOut() {
+		 click(navMenuBtn);
+		 click(signOutBtn);
+		return new LoginPage(driver);
+	}			
 
 }
