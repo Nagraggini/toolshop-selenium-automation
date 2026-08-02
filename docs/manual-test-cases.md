@@ -7,9 +7,8 @@ amelyek alapján az automatizált Selenium tesztek elkészültek.
 
 Az alábbiakban részletesen, a vizsgaremek követelményeihez igazítva összegyűjtöttem a lépéseket és a teszteseteket a Practice Software Testing - Toolshop ([https://practicesoftwaretesting.com/](https://practicesoftwaretesting.com/)) webalkalmazáshoz, amely minden kötelező funkciót lefed.
 
-## TC01
+## TC01 Regisztráció
 
-Regisztráció
 Teszt rövid leírása: Új felhasználói fiók sikeres létrehozása.
 
 Teszt lépések:
@@ -37,9 +36,8 @@ Bejelentkezünk az oldalra az újonnan regisztrált email címmel és jelszóval
 Elvárt eredmény: A sikeres bejelentkezés után megjelenik az üdvözlő üzenet, melynek ez a tartalma: 
 "Here you can manage your profile, favorites and orders."
 
-## TC02
+## TC02 Regisztráció
 
-Regisztráció
 Teszt rövid leírása: Új felhasználói fiók sikertelen létrehozása.
 
 Teszt lépések:
@@ -67,9 +65,8 @@ A rendszer kiírja, hogy sikertelen a regisztráció.
 Elvárt eredmény: Sikertelen a regisztráció és a keresztnév alatt megjelenik egy hibaüzenet: 
 "First name is required"
 
-## TC03
+## TC03 Bejelentkezés
 
-Bejelentkezés
 Teszt rövid leírása: A regisztrált fiókkal való sikeres belépés.
 
 Teszt lépések:
@@ -83,11 +80,10 @@ A teszt felhasználó adatai a gyökér könyvtárban lévő .env fájlban talá
 
 A "Login" gombra kattintás.
 
-Elvárt eredmény: A felhasználó sikeresen belép, a felül a hamburger ikonra kattintás után megjelenik a felhasználó teljes neve.
+Elvárt eredmény: A felhasználó sikeresen belép, felül a hamburger ikonra kattintás után megjelenik a felhasználó teljes neve.
 
-## TC04
+## TC04 Adatkezelési nyilatkozat használata
 
-Adatkezelési nyilatkozat használata
 Teszt rövid leírása: Az adatvédelmi / ÁSZF / jogi nyilatkozat elérhetőségének és tartalmának validálása.
 
 Teszt lépések:
@@ -100,9 +96,8 @@ Megjelenik az adatvédelmi nyilatkozat, melynek a tartalmát ellenőrizzük, hog
 
 Elvárt eredmény: Az adatkezelési nyilatkozat oldala hibátlanul betöltődik, és a kötelező jogi szöveg megjelenik a felületen ("Data Removal", "Data Security").
 
-## TC05
+## TC05 Adatok listázása
 
-Adatok listázása
 Teszt rövid leírása: A termékek vagy elemek listájának megjelenítése a felületen.
 
 Teszt lépések:
@@ -115,9 +110,7 @@ Elemek darabszámának ellenőrzése. (9 db)
 
 Elvárt eredmény: A termékek listája hiba nélkül betöltődik, és a tételek láthatóvá válnak a felhasználó számára.
 
-## TC06
-
-Termékek meglétének ellenőrzése
+## TC06 Termékek meglétének ellenőrzése
 
 Teszt rövid leírása: A megjelenő terméklistában ellenőrizzük, hogy az elvárt termékek megtalálhatóak-e.
 
@@ -145,8 +138,8 @@ A terméklista tartalmazza az összes elvárt terméket, és azok nevei megfelel
 
 ## TC07 Több oldalas lista bejárása
 
-Teszt rövid leírása: A kategóriák menüben ehhez a három típushoz megjelennek a termékek 
-az oldalon (Hand Tools, Power Tools, Other, Special Tools)
+Teszt rövid leírása: A kategóriák menüben ehhez a négy típushoz megjelennek a termékek 
+az oldalon (Hand Tools, Power Tools, Other, Special Tools).
 
 Teszt lépések:
 
@@ -156,7 +149,7 @@ A "Categories" menüpontra kattintás, utána a  kategória "Hand Tools" kivála
 "Power Tools", "Other", "Special Tools" 
 
 
-Elvárt eredmény: Az "Hand Tools", "Power Tools", "Other" kategóriáknál megjelenik legalább egy elem.
+Elvárt eredmény: A "Hand Tools", "Power Tools", "Other" kategóriáknál megjelenik legalább egy elem.
 A "Special Tools" kategóriánál, csak ez a szöveg jelenik meg "There are no products found."
 
 ## TC08 Új adat bevitel
@@ -174,4 +167,31 @@ Az űrlap mezőinek kitöltése adatokkal (Név, Tárgy, Üzenet).
 A "Send" vagy "Submit" gombra kattintás.
 
 Elvárt eredmény: A rendszer elfogadja az adatokat, és egy sikeres üzenetet jelenít meg a felületen.
+
+## TC09 Ismételt és sorozatos adatbevitel adatforrásból
+
+Teszt rövid leírása: Több felhasználó regisztrációja, bejelentkezése és kijelentkezése külső adatforrásból (CSV) beolvasott adatok alapján.
+
+Teszt lépések:
+
+Navigáció a [https://practicesoftwaretesting.com/](https://practicesoftwaretesting.com/) weboldalra.
+
+A felhasználói adatok betöltése a külső adatforrásból (data/users.csv).
+
+A felhasználók listájának ellenőrzése, hogy nem üres-e.
+
+Minden egyes felhasználónál az alábbi lépések végrehajtása:
+
+- Navigáció a regisztrációs oldalra a főoldalról a hamburger ikonon, a "Sign in" linken, majd a "Register your account" gombon keresztül.
+
+- A regisztrációs űrlap kitöltése a CSV fájlból származó adatokkal (keresztnév, vezetéknév, cím adatok, telefonszám). A születési idő a mai dátumhoz képest 20 évvel korábbi dátum  január 1-je a tesztek későbbi újrafelhasználhatósága érdekében. Az email randomizált, hogy ne legyen email cím duplikáció miatt sikertelen a teszt. A jelszó randomizált. Jelszó követelmények: Minimum 8 karakter, kicsi és nagy betű is kötelező, legalább egy szám, legalább egy speciális karakter 
+(@, #, $, stb.)
+
+- A "Register" gombra kattintás a regisztráció elküldéséhez
+
+- Bejelentkezés az újonnan regisztrált fiók adataival (email és jelszó) a bejelentkezési oldalon, majd a "Login" gombra kattintás.
+
+- Kijelentkezés a fiókból (SignOut) a következő iteráció előtt. Törlés nem szükséges pár perc múlva automatikusan törlődik az adatbázisból az új felhasználó.
+
+Elvárt eredmény: A rendszer a CSV-ben szereplő összes felhasználót hiba nélkül regisztrálja, a bejelentkezés minden esetben sikeresen megtörténik (a felhasználó neve megjelenik a menüben), és a teszt végigfut hibamentesen a teljes adatsoron. 
 
