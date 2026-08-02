@@ -159,3 +159,20 @@ Az elvárt terméknevek ellenőrzése a listában:
 Elvárt eredmény:
 A terméklista tartalmazza az összes elvárt terméket, és azok nevei megfelelően megjelennek a felhasználói felületen.
 
+## TC07 Több oldalas lista bejárása
+
+Teszt rövid leírása: A kategóriák menüben ehhez a három típushoz megjelennek a termékek 
+az oldalon (Hand Tools, Power Tools, Other, Special Tools)
+
+Teszt lépések:
+
+Navigáció a [https://practicesoftwaretesting.com/](https://practicesoftwaretesting.com/) weboldalra.
+
+A "Categories" menüpontra kattintás, utána a  kategória "Hand Tools" kiválasztása és ellenőrzése, hogy legalább egy elem megjelenik, utána a másik három kategória ellenőrzése
+"Power Tools", "Other", "Special Tools" 
+
+
+Elvárt eredmény: Az "Hand Tools", "Power Tools", "Other" kategóriáknál megjelenik legalább egy elem.
+A "Special Tools" kategóriánál, csak ez a szöveg jelenik meg "There are no products found."
+
+
