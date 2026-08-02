@@ -1,19 +1,3 @@
-# Vizsgaremek követelményeinek megfelelés
-
-| Követelmények 								  | Teszteset 		 | Megjegyzés							      |			
-| :---------------------------------------------- | :--------------- | :----------------------------------------- |		
-| Regisztráció 									  | TC01 , TC02		 | 	Pozitív és negatív teszt                  |		
-| Bejelentkezés									  | TC03			 |    										  |		
-| Adatkezelési nyilatkozat használata 			  | TC04			 |       									  |		
-| Adatok listázása							  	  | 		 		 |											  |		
-| Több oldalas lista bejárás					  | TC01		 	 | TC01 nem kifejezetten több oldalas bejárás |		
-| Új adat bevitel 								  |     			 | 										      |		
-| Ismételt és sorozatos adatbevitel adatforrásból |  			 	 |     									 	  |		
-| Meglévő adat módosítás						  | 			 	 |     										  |		
-| Adat vagy adatok törlése 						  | 			 	 |    									      |		
-| Adatok lementése felületről					  |  			 	 |     									      |		
-| Kijelentkezés									  |  			 	 |     									      |			
-
 # Manuális tesztesetek dokumentációja
 
 ## Cél
@@ -175,4 +159,19 @@ A "Categories" menüpontra kattintás, utána a  kategória "Hand Tools" kivála
 Elvárt eredmény: Az "Hand Tools", "Power Tools", "Other" kategóriáknál megjelenik legalább egy elem.
 A "Special Tools" kategóriánál, csak ez a szöveg jelenik meg "There are no products found."
 
+## TC08 Új adat bevitel
+
+Teszt rövid leírása: Új kapcsolati adat rögzítése.
+
+Teszt lépések:
+
+Navigáció a [https://practicesoftwaretesting.com/](https://practicesoftwaretesting.com/) weboldalra.
+
+Navigáció a Kapcsolat (Contact) menüpontra vagy egy adatbeviteli űrlapra.
+
+Az űrlap mezőinek kitöltése adatokkal (Név, Tárgy, Üzenet).
+
+A "Send" vagy "Submit" gombra kattintás.
+
+Elvárt eredmény: A rendszer elfogadja az adatokat, és egy sikeres üzenetet jelenít meg a felületen.
 
