@@ -99,5 +99,14 @@ public class HomePage extends BasePage{
 	    return new ContactPage(driver);
 	}	
 	
+	/**
+	 *  pl.: Combination Pliers
+	 */
+	public ProductPage clickSpecificItem(String productName) {
+		By specProduct = By.xpath("//h5[@data-test='product-name' and text()='"+productName+"']");
+		click(specProduct);
+		return new ProductPage(driver);
+		
+	}
 	
 }
