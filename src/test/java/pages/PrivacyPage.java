@@ -17,10 +17,10 @@ public class PrivacyPage extends BasePage {
 	}
 
 	public boolean verifyTwoWordsInPrivacyText(String word1, String word2) {
-	    // 1. Leszedjük az egész szöveget a konténerből
+	    // Leszedjük az egész szöveget a konténerből
 	    String fullText = driver.findElement(privacyContainer).getText();
 	    
-	    // 2. Csekkoljuk a két szót.
+	    // Csekkoljuk a két szót.
 	    boolean containsFirstWord = fullText.contains(word1);
 	    boolean containsSecondWord = fullText.contains(word2);
 	    

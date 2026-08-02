@@ -9,6 +9,7 @@ public class HomePage extends BasePage{
 	private final By pageLogo = By.cssSelector("a.navbar-brand");
 	
 	private final By sigInBtn = By.cssSelector("[data-test='nav-sign-in']");	
+	private final By privacyPolicyLink = By.cssSelector("[routerlink='privacy']");
 	
 	public HomePage(WebDriver driver) {
 		super(driver);			
@@ -27,5 +28,10 @@ public class HomePage extends BasePage{
 	    click(sigInBtn);
 	    return new LoginPage(driver);
 	}	
+	
+	public PrivacyPage clickPrivacyPolicyLink() {	
+	    click(privacyPolicyLink);
+	    return new PrivacyPage(driver);
+	}
 	
 }

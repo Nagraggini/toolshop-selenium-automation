@@ -3,8 +3,8 @@
 | Követelmények 								  | Teszteset 		 | Megjegyzés							      |			
 | :---------------------------------------------- | :--------------- | :----------------------------------------- |		
 | Regisztráció 									  | TC01 , TC02		 | 	Pozitív és negatív teszt                  |		
-| Bejelentkezés									  | TC01			 |    										  |		
-| Adatkezelési nyilatkozat használata 			  |  				 |       									  |		
+| Bejelentkezés									  | TC03			 |    										  |		
+| Adatkezelési nyilatkozat használata 			  | TC04			 |       									  |		
 | Adatok listázása							  	  | 		 		 |											  |		
 | Több oldalas lista bejárás					  | TC01		 	 | TC01 nem kifejezetten több oldalas bejárás |		
 | Új adat bevitel 								  |     			 | 										      |		
