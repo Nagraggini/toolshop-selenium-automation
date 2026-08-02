@@ -47,13 +47,17 @@ public class ContactPage extends BasePage {
 		return this;
 	}
 
-	// Minimum 50 karakter.
+	/**
+	 *  Minimum 50 karakter.
+	 */
 	public ContactPage fillMessage(String message) {
 		type(messageTextArea, message);
 		return this;
 	}
 
-	// Üresnek kell lennie a fájlnak.
+	/**
+	 *  Üresnek kell lennie a fájlnak.
+	 */
 	public ContactPage uploadAttachment(String filePath) {
 		type(attachmentInput, filePath); 
 		return this;
@@ -77,7 +81,9 @@ public class ContactPage extends BasePage {
 		return isDisplayed(successMessage);
 	}
 	
-	// Thanks for your message! We will contact you shortly.
+	/**
+	 *  Megjelennő üzenet: "Thanks for your message! We will contact you shortly."
+	 */
 	public String getSuccessMessage() {
 		return getText(successMessage);
 	}

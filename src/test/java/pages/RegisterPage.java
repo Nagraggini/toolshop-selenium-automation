@@ -117,7 +117,9 @@ public class RegisterPage extends BasePage {
 	        return new RegisterPage(driver);
 	    }
 	    
-	    // First name is required
+	   /**
+	    *  Megjelenő üzenet: "First name is required"
+	    */
 	    public String getMissingFirstNameErrorMessage(String errorMessage) {
 	    	return getText(firstNameErrorMessage);	        
 	    }
