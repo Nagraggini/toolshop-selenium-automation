@@ -12,20 +12,21 @@ public class HomePage extends BasePage{
 
 	private final By pageLogo = By.cssSelector("a.navbar-brand");
 	
-	private final By signInBtn = By.cssSelector("[data-test='nav-sign-in']");	
-	private final By privacyPolicyLink = By.cssSelector("[routerlink='privacy']");
-	private final By productNames = By.cssSelector("[data-test='product-name']");
-	
 	// A kategória menü lenyitása. 
 	private final By categoriesDropdown = By.cssSelector("[data-test='nav-categories']");
+	private final By contactBtn = By.cssSelector("[data-test='nav-contact']");
+	private final By signInBtn = By.cssSelector("[data-test='nav-sign-in']");	
 	
+	private final By privacyPolicyLink = By.cssSelector("[routerlink='privacy']");
+	private final By productNames = By.cssSelector("[data-test='product-name']");
+		
 	private final By handToolsCategory = By.cssSelector("a[data-test='nav-hand-tools']");
 	private final By handPowerToolsCategory = By.cssSelector("a[data-test='nav-power-tools']");
 	private final By handOtherCategory = By.cssSelector("a[data-test='nav-other']");
 	private final By specialToolsCategory = By.cssSelector("a[data-test='nav-special-tools']");
 	
 	private final By noProductsMessage = By.cssSelector("[data-test='category-empty']");
-	
+		
 	public HomePage(WebDriver driver) {
 		super(driver);			
 	}
@@ -92,5 +93,11 @@ public class HomePage extends BasePage{
 	public String getNoProductsMessage() {
 	    return getText(noProductsMessage);
 	}
+	
+	public ContactPage clickContact() {	
+	    click(contactBtn);
+	    return new ContactPage(driver);
+	}	
+	
 	
 }
