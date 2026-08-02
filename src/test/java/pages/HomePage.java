@@ -1,7 +1,11 @@
 package pages;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasePage{
@@ -10,6 +14,7 @@ public class HomePage extends BasePage{
 	
 	private final By sigInBtn = By.cssSelector("[data-test='nav-sign-in']");	
 	private final By privacyPolicyLink = By.cssSelector("[routerlink='privacy']");
+	private final By productItemCards = By.cssSelector("[data-test='product-name']");
 	
 	public HomePage(WebDriver driver) {
 		super(driver);			
@@ -34,4 +39,19 @@ public class HomePage extends BasePage{
 	    return new PrivacyPage(driver);
 	}
 	
+	public List<String> getAllProductNames() {
+	    // Megvárjuk, hogy megjelenjenek a termékkártyák.
+	    waitForAllElementsPresent(productItemCards);
+
+	    List<WebElement> productNameElements = findAll(productItemCards);
+
+	    List<String> productNames = new ArrayList<>();
+
+	    for (WebElement itemName : productNameElements) {
+	        // trim() eltávolítja a felesleges szóközöket az elejéről és a végéről.
+	        productNames.add(itemName.getText().trim());
+	    }
+
+	    return productNames;
+	}
 }

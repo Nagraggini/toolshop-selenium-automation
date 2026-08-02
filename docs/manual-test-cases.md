@@ -115,3 +115,47 @@ Az oldal láblécében (footer) található "Privacy Policy" gombra kattintás.
 Megjelenik az adatvédelmi nyilatkozat, melynek a tartalmát ellenőrizzük, hogy megtalálhatóak-e benne a kulcsszavak: "Data Removal", "Data Security"
 
 Elvárt eredmény: Az adatkezelési nyilatkozat oldala hibátlanul betöltődik, és a kötelező jogi szöveg megjelenik a felületen ("Data Removal", "Data Security").
+
+## TC05
+
+Adatok listázása
+Teszt rövid leírása: A termékek vagy elemek listájának megjelenítése a felületen.
+
+Teszt lépések:
+
+Navigáció a [https://practicesoftwaretesting.com/](https://practicesoftwaretesting.com/) weboldalra.
+
+A termék kártyák betöltődésének megvárása.
+
+Elemek darabszámának ellenőrzése. (9 db)
+
+Elvárt eredmény: A termékek listája hiba nélkül betöltődik, és a tételek láthatóvá válnak a felhasználó számára.
+
+## TC06
+
+Termékek meglétének ellenőrzése
+
+Teszt rövid leírása: A megjelenő terméklistában ellenőrizzük, hogy az elvárt termékek megtalálhatóak-e.
+
+Teszt lépések:
+
+Navigáció a [https://practicesoftwaretesting.com/](https://practicesoftwaretesting.com/) weboldalra.
+
+A termék kártyák betöltődésének megvárása.
+
+A terméknevek lekérése a felületről.
+
+Az elvárt terméknevek ellenőrzése a listában:
+   - Combination Pliers
+   - Pliers
+   - Bolt Cutters
+   - Long Nose Pliers
+   - Slip Joint Pliers
+   - Claw Hammer with Shock Reduction Grip
+   - Hammer
+   - Claw Hammer
+   - Thor Hammer
+
+Elvárt eredmény:
+A terméklista tartalmazza az összes elvárt terméket, és azok nevei megfelelően megjelennek a felhasználói felületen.
+
