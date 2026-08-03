@@ -12,6 +12,7 @@ import pages.AccountPage;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.RegisterPage;
+import utils.ConfigReader;
 import utils.User;
 import utils.UsersCsv;
 
@@ -64,8 +65,14 @@ class BulkRegistrationFromCsvTest extends BaseTest{
 
             // Kijelentkezés a következő kör előtt (ha szükséges, vagy törlés ha biztosítva van).
             loggedInAccount.clickSignOut();
+            
+            // Fiók törlése az admin fiók segítségével. 
+            homePage.clickSignIn()
+            .fillEmail(ConfigReader.getAdminEmail())
+            .fillPassword(ConfigReader.getAdminPassword())
+            .clickLogin().clickUsersList().clearAndTypeEmailAddressAndClickSearchBtn(u.email())
+            .clickDeleteUserBtn().clickSignOut();
         }
-        
-        // Pár perc múlva törli automatikusan a felhasználókat a rendszer.
+                
     }
 }

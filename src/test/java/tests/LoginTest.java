@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import base.BaseTest;
+import pages.AccountPage;
 import utils.ConfigReader;
 
 class LoginTest extends BaseTest {
@@ -15,11 +16,18 @@ class LoginTest extends BaseTest {
 	 */
 	@Test
 	@DisplayName("TC03 - Sikeres bejelentkezés ellenőrzése.")
-	void loginTest() {  	    
-	    assertEquals("Bob Smith",homePage.clickSignIn()
+	void loginTest() {  
+		// Bejelentkezünk.
+	    AccountPage accountPage = homePage.clickSignIn()
 	            .fillEmail(ConfigReader.getBobEmail())
 	            .fillPassword(ConfigReader.getBobPassword())
-	            .clickLogin().getUserFullName());
-	}
+	            .clickLogin();
+	    
+	    // Ellenőrizzük, hogy a helyes név jelenik-e meg.
+	    assertEquals("Bob Smith", accountPage.getUserFullName(), "A bejelentkezett felhasználó neve nem megfelelő");
+	    
+	    // Kijelentkezünk.
+	    accountPage.clickSignOut();
+	    }
 
 }

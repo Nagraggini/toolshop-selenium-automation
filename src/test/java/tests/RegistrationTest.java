@@ -9,6 +9,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import base.BaseTest;
+import pages.AccountPage;
+import utils.ConfigReader;
 
 // Selenium Page Object Model + Fluent Page Chaining
 class RegistrationTest extends BaseTest {
@@ -27,23 +29,33 @@ class RegistrationTest extends BaseTest {
 		    .withDayOfMonth(1)
 		    .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		
+		 AccountPage accountPage = homePage.clickSignIn()
+			        .clickRegister()
+			        .fillFirstName(testData.getFirstName())
+			        .fillLastName(testData.getLastName())
+			        .fillDateOfBirth(dateOfBirth)
+			        .fillHouseNumber("10")
+			        .fillPostalCode("12345")
+			        .selectCountry("Hungary")
+			        .fillPhone("301234567")
+			        .fillEmail(testData.getEmail())
+			        .fillPassword(testData.getPassword())
+			        .clickRegister()
+			        .fillEmail(testData.getEmail())
+			        .fillPassword(testData.getPassword()).clickLogin();
+				 
 		assertEquals("Here you can manage your profile, favorites and orders."
-		,homePage.clickSignIn()
-        .clickRegister()
-        .fillFirstName(testData.getFirstName())
-        .fillLastName(testData.getLastName())
-        .fillDateOfBirth(dateOfBirth)
-        .fillHouseNumber("10")
-        .fillPostalCode("12345")
-        .selectCountry("Hungary")
-        .fillPhone("301234567")
-        .fillEmail(testData.getEmail())
-        .fillPassword(testData.getPassword())
-        .clickRegister()
-        .fillEmail(testData.getEmail())
-        .fillPassword(testData.getPassword()).clickLogin().getWelcomeMessage());
+		,accountPage.getWelcomeMessage());
 		
-		// Pár perc múlva automatikusan törli az oldal az új felhasználót.
+		 // Kijelentkezünk.
+	    accountPage.clickSignOut();
+	    
+	 // Fiók törlése az admin fiók segítségével. 
+        homePage.clickSignIn()
+        .fillEmail(ConfigReader.getAdminEmail())
+        .fillPassword(ConfigReader.getAdminPassword())
+        .clickLogin().clickUsersList().clearAndTypeEmailAddressAndClickSearchBtn(testData.getEmail())
+        .clickDeleteUserBtn().clickSignOut();
 	}
 	
 	/**
