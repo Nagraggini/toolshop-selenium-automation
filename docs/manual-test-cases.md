@@ -200,14 +200,12 @@ Minden egyes felhasználónál az alábbi lépések végrehajtása:
 Elvárt eredmény: A rendszer a CSV-ben szereplő összes felhasználót hiba nélkül regisztrálja, a bejelentkezés minden esetben sikeresen megtörténik (a felhasználó neve megjelenik a menüben), és a teszt végigfut hibamentesen a teljes adatsoron. 
 
 
-TC10 Adatok lementése felületről
+## TC10 Adatok lementése felületről
 
 Teszt rövid leírása: A felületen megjelenő adatok terméknevek és árak kiolvasása és fájlba mentése.
 
 Teszt lépések:
 
-Egy elem szöveges tartalmának lekérése a Selenium .getText() metódusával.
-
-A kapott adat Java segítségével történő kiírása egy külső szöveges vagy riport fájlba (.txt vagy .csv).
+Összes termék nevét és árát lementjük egy .csv fájlba. Mind az öt oldalon szereplő temékek adatait. 
 
 Elvárt eredmény: A teszt kód sikeresen kimenti a felületről kiolvasott adatot a fájlrendszerbe.
