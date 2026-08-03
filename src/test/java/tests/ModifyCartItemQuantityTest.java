@@ -28,19 +28,18 @@ class ModifyCartItemQuantityTest extends BaseTest {
 		cartPage.clickDeleteButtonByProductName(productName1);
 		assertTrue(cartPage.emptyCartMessageVisible(), "A kosárnak üresnek kell lennie");
 		
+		String productName2="Bolt Cutters";
+				
+		assertEquals("5", cartPage.clickHome().clickSpecificItem(productName2)
+				.changeQuantityAndAddToCart("5")
+				.clickCart().getQuantityInputByProductName(productName2)
+		        , "A kosárban 5 db terméknek kell lennie");
 		
-		/*
-		 * TODO: 		 
+		// Kivesszük a termékeket a kosárból.
+		cartPage.clickDeleteButtonByProductName(productName2);	
 		
-
-		products = new HomePage(driver).goToProducts();
-
-		details = products.openFirstProductDetails();
-		details.setQuantity(5).addToCart();
-		cart = details.goToCartFromModal();
-
-		assertEquals("5", cart.getQuantityTextForFirstRow(), "A kosárban 5 db terméknek kell lennie");
-		 */
+		// Kijelentkezés.
+		cartPage.clickHome().clickSignOut();
 	}
 
 }
