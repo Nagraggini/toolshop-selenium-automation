@@ -25,8 +25,8 @@ public class ProductPage extends BasePage {
 	/**
 	 * Ennyi darab terméket rakunk a kosárba.
 	 */
-	public ProductPage changeQuantity(String pieces) {
-		type(quantity, pieces);
+	public ProductPage changeQuantityAndAddToCart(String pieces) {
+		clearAndType(quantity, pieces);
 		click(addToCartBtn);
 		return new ProductPage (driver);
 	}

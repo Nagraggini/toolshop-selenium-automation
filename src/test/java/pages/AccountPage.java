@@ -13,6 +13,9 @@ public class AccountPage extends BasePage {
 	// Itt látható a felhasználó teljes neve. Lenyíló lista.
 	private final By navMenuBtn = By.cssSelector("[data-test='nav-menu']");
 
+	//Ez csak az admin felületen érhető el.
+	private final By usersListBtn = By.cssSelector("[data-test='nav-admin-users']");
+	
 	private final By signOutBtn = By.cssSelector("[data-test='nav-sign-out']");
 
 	private final By welcomeMessage = By.xpath("//p[contains(text(),'profile')]");
@@ -44,7 +47,16 @@ public class AccountPage extends BasePage {
 	public String getUserFullName() {
 		return getText(navMenuBtn);
 	}
-
+	
+	/**
+	 * Ez csak az admin felületen érhető el.
+	 */
+	public UsersListPage clickUsersList() {
+		click(navMenuBtn);
+		click(usersListBtn);
+		return new UsersListPage(driver);
+	}
+	
 	public LoginPage clickSignOut() {
 		click(navMenuBtn);
 		click(signOutBtn);

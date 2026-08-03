@@ -82,6 +82,9 @@ public abstract class BasePage {
 		waitUntilVisible(locator).sendKeys(text);
 	}
 
+	/**
+	 * Kitörli a mező értékét és utána írja be az újat.
+	 */
 	protected void clearAndType(By locator, String text) {
 		WebElement element = waitUntilVisible(locator);
 		element.clear();

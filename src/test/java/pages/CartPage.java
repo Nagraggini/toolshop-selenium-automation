@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CartPage extends BasePage{
 
+	private final By homeBtn = By.cssSelector("[data-test='nav-home']");
+			
 	private final By continueShoppingBtn = By.cssSelector("[data-test='continue-shopping']");
 	private final By emptyCartMessage=
 			By.xpath("//p[normalize-space()='The cart is empty. Nothing to display.']");
@@ -53,4 +55,15 @@ public class CartPage extends BasePage{
     public Boolean emptyCartMessageVisible() {
     	return waitUntilVisible(emptyCartMessage).isDisplayed(); 
     }
+    
+    /**
+	 * Visszatérünk a főoldalra.
+	 */
+	public HomePage clickHome() {
+		click(homeBtn);
+		return new HomePage(driver);
+	}
+	
+	
+
 }

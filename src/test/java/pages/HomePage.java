@@ -17,6 +17,11 @@ public class HomePage extends BasePage{
 	private final By contactBtn = By.cssSelector("[data-test='nav-contact']");
 	private final By signInBtn = By.cssSelector("[data-test='nav-sign-in']");	
 	
+	// Itt látható a felhasználó teljes neve. Lenyíló lista.
+	private final By navMenuBtn = By.cssSelector("[data-test='nav-menu']");
+		
+	private final By signOutBtn = By.cssSelector("[data-test='nav-sign-out']");
+		
 	private final By privacyPolicyLink = By.cssSelector("[routerlink='privacy']");
 	private final By productNames = By.cssSelector("[data-test='product-name']");
 		
@@ -107,6 +112,12 @@ public class HomePage extends BasePage{
 		click(specProduct);
 		return new ProductPage(driver);
 		
+	}
+	
+	public HomePage clickSignOut() {
+		click(navMenuBtn);
+		click(signOutBtn);
+		return this;
 	}
 	
 }
