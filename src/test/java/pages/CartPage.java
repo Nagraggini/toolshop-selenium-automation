@@ -2,11 +2,14 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CartPage extends BasePage{
 
 	private final By continueShoppingBtn = By.cssSelector("[data-test='continue-shopping']");
+	private final By emptyCartMessage=
+			By.xpath("//p[normalize-space()='The cart is empty. Nothing to display.']");
 	
 	public CartPage(WebDriver driver) {
 		super(driver);
@@ -36,8 +39,18 @@ public class CartPage extends BasePage{
      * pl. "Claw Hammer with Shock Reduction Grip"
      */
     public String getQuantityInputByProductName(String productName) {
-         return getText(By.xpath("//tr[td/*[@data-test='product-title' and contains(text(), '"+
+    	// Mivel inpu mező, ezért nem elég a getText() metódus.
+         return waitUntilPresent(By.xpath("//tr[td/*[@data-test='product-title' and contains(text(), '"+
         		productName+"')]]"
-        		+ "//input[@data-test='product-quantity']"));
-    }    
+        		+ "//input[@data-test='product-quantity']")).getAttribute("value");
+    }
+    
+    /**
+     * 
+     * Megnézi, hogy a "The cart is empty. Nothing to display."
+     * szöveg létezik-e a DOM fában és látható-e.
+     */
+    public Boolean emptyCartMessageVisible() {
+    	return waitUntilVisible(emptyCartMessage).isDisplayed(); 
+    }
 }

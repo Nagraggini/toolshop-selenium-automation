@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import base.BaseTest;
 import pages.CartPage;
+import utils.ConfigReader;
 
 class ModifyCartItemQuantityTest extends BaseTest {
 
@@ -16,12 +17,21 @@ class ModifyCartItemQuantityTest extends BaseTest {
 	void addProductChangeQuantityViaReadAndRemove() {
 		String productName1="Combination Pliers";
 		
-		CartPage cartPage=homePage.clickSpecificItem(productName1).addToCart().clickCart();
+		CartPage cartPage=homePage.clickSignIn()
+	            .fillEmail(ConfigReader.getAdminEmail())
+	            .fillPassword(ConfigReader.getAdminPassword())
+	            .clickLogin().clickHome().clickSpecificItem(productName1).addToCart()
+	            .clickCart();
+		
+		assertEquals("1",cartPage.getQuantityInputByProductName(productName1)
+				,"A kosárban 1 db terméknek kell lennie");
+		cartPage.clickDeleteButtonByProductName(productName1);
+		assertTrue(cartPage.emptyCartMessageVisible(), "A kosárnak üresnek kell lennie");
+		
+		
 		/*
-		 * TODO: 
-		 * assertEquals("1", cart.getQuantityTextForFirstRow(), "A kosárban 1 db terméknek kell lennie");
-		 * cart.removeFirstRow();
-		assertEquals(0, cart.getRowCount(), "A kosárnak üresnek kell lennie");
+		 * TODO: 		 
+		
 
 		products = new HomePage(driver).goToProducts();
 

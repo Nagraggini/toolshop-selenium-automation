@@ -103,7 +103,7 @@ public class HomePage extends BasePage{
 	 *  pl.: Combination Pliers
 	 */
 	public ProductPage clickSpecificItem(String productName) {
-		By specProduct = By.xpath("//h5[@data-test='product-name' and text()='"+productName+"']");
+		By specProduct = By.xpath("//h5[@data-test='product-name' and normalize-space()='"+productName+"']");
 		click(specProduct);
 		return new ProductPage(driver);
 		
