@@ -33,6 +33,8 @@ A rendszer sikeresen regisztrálja a felhasználót, és átirányít a bejelent
 
 Bejelentkezünk az oldalra az újonnan regisztrált email címmel és jelszóval.
 
+Utána admin felhasználóval töröljük az újonnan létrehozott fiókot.
+
 Elvárt eredmény: A sikeres bejelentkezés után megjelenik az üdvözlő üzenet, melynek ez a tartalma: 
 "Here you can manage your profile, favorites and orders."
 
@@ -191,7 +193,21 @@ Minden egyes felhasználónál az alábbi lépések végrehajtása:
 
 - Bejelentkezés az újonnan regisztrált fiók adataival (email és jelszó) a bejelentkezési oldalon, majd a "Login" gombra kattintás.
 
-- Kijelentkezés a fiókból (SignOut) a következő iteráció előtt. Törlés nem szükséges pár perc múlva automatikusan törlődik az adatbázisból az új felhasználó.
+- Kijelentkezés a fiókból (SignOut) a következő iteráció előtt. 
+
+- Utána admin felhasználóval töröljük az újonnan létrehozott fiókot.
 
 Elvárt eredmény: A rendszer a CSV-ben szereplő összes felhasználót hiba nélkül regisztrálja, a bejelentkezés minden esetben sikeresen megtörténik (a felhasználó neve megjelenik a menüben), és a teszt végigfut hibamentesen a teljes adatsoron. 
 
+
+TC10 Adatok lementése felületről
+
+Teszt rövid leírása: A felületen megjelenő adatok terméknevek és árak kiolvasása és fájlba mentése.
+
+Teszt lépések:
+
+Egy elem szöveges tartalmának lekérése a Selenium .getText() metódusával.
+
+A kapott adat Java segítségével történő kiírása egy külső szöveges vagy riport fájlba (.txt vagy .csv).
+
+Elvárt eredmény: A teszt kód sikeresen kimenti a felületről kiolvasott adatot a fájlrendszerbe.
