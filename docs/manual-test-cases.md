@@ -202,10 +202,12 @@ Elvárt eredmény: A rendszer a CSV-ben szereplő összes felhasználót hiba n�
 
 ## TC10 Adatok lementése felületről
 
-Teszt rövid leírása: A felületen megjelenő adatok terméknevek és árak kiolvasása és fájlba mentése.
+Teszt rövid leírása: A főoldalon megjelenő adatok, vagyis terméknevek és árak kiolvasása, valamint fájlba mentése.
 
 Teszt lépések:
 
-Összes termék nevét és árát lementjük egy .csv fájlba. Mind az öt oldalon szereplő temékek adatait. 
+Navigáció a [https://practicesoftwaretesting.com/](https://practicesoftwaretesting.com/) weboldalra.
 
-Elvárt eredmény: A teszt kód sikeresen kimenti a felületről kiolvasott adatot a fájlrendszerbe.
+A főoldalon lévő összes termék nevét és árát lementjük egy .csv fájlba. 
+
+Elvárt eredmény: A teszt kód sikeresen lementi a felületről kiolvasott adatokat egy .csv fájlba.

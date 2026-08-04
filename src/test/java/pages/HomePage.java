@@ -23,7 +23,11 @@ public class HomePage extends BasePage{
 	private final By signOutBtn = By.cssSelector("[data-test='nav-sign-out']");
 		
 	private final By privacyPolicyLink = By.cssSelector("[routerlink='privacy']");
+	
+	// Termék kártyák.
+	private final By productCardsLocator = By.cssSelector("a.card[data-test^='product-']");
 	private final By productNames = By.cssSelector("[data-test='product-name']");
+	private final By productPrices = By.cssSelector("[data-test='product-price']");
 		
 	private final By handToolsCategory = By.cssSelector("a[data-test='nav-hand-tools']");
 	private final By handPowerToolsCategory = By.cssSelector("a[data-test='nav-power-tools']");
@@ -120,4 +124,24 @@ public class HomePage extends BasePage{
 		return this;
 	}
 	
+	/**
+     * Visszaadja a főoldalon lévő termékek nevét és árát listák listájaként.
+     */
+    public List<List<String>> getAllProductNamesAndPrices() {        
+        // Megvárjuk, hogy megjelenjenek a termékkártyák.
+        waitForAllElementsPresent(productCardsLocator);
+        
+        List<WebElement> productElements = findAll(productCardsLocator);
+        List<List<String>> productData = new ArrayList<>();
+
+        for (WebElement product : productElements) {
+        	// Először a listán belül megkeressük az webelement-t és után kérjük le a szövegét. 
+            String name = product.findElement(productNames).getText().trim();
+            String price = product.findElement(productPrices).getText().trim();
+            
+            productData.add(List.of(name, price));
+        }
+        
+        return productData;
+    }
 }

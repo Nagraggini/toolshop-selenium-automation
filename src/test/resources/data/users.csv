@@ -1,7 +1,5 @@
 firstName,lastName,country,zipcode,houseNumber,street,city,state,mobile,password
-User,Test,Slovenia,4260,15,Savska cesta,Bled,Bled,123456789,PassW0Rd!63
-User,Test,Slovenia,4260,15,Savska cesta,Bled,Bled,123456789,PassW0Rd!63
-User,Test,Slovenia,4260,15,Savska cesta,Bled,Bled,123456789,PassW0Rd!63
-User,Test,Slovenia,4260,15,Savska cesta,Bled,Bled,123456789,PassW0Rd!63
-User,Test,Slovenia,4260,15,Savska cesta,Bled,Bled,123456789,PassW0Rd!63
-User,Test,Slovenia,4260,15,Savska cesta,Bled,Bled,123456789,PassW0Rd!63
+User,Test,United States of Amarica (the),43215,15,Bethany Crest,Port Lenoretown,Missouri,123456789,PassW0Rd!63
+User,Test,United States of Amarica (the),43216,16,Bethany Crest,Port Lenoretown,Missouri,123456790,PassW0Rd!64
+User,Test,United States of Amarica (the),43217,17,Bethany Crest,Port Lenoretown,Missouri,123456791,PassW0Rd!65
+User,Test,United States of Amarica (the),43218,18,Bethany Crest,Port Lenoretown,Missouri,123456792,PassW0Rd!66

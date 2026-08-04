@@ -16,7 +16,7 @@ class ProductListTest extends BaseTest{
 	 * TC05 Adatok listázása.
 	 */
 	@Test
-	@DisplayName("TC05 - A terméklista 9 db terméket tartalmaz.")
+	@DisplayName("TC05 - A főoldalon lévő terméklista 9 db terméket tartalmaz.")
 	void productListTest() {
 		assertEquals(9, homePage.getAllProductNames().size());
 	}
