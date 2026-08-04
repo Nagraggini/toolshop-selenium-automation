@@ -1,2 +1,0 @@
-# Vezetői tesztjelentés (minta)
-

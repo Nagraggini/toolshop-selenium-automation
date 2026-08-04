@@ -43,6 +43,13 @@ public abstract class BasePage {
 	protected WebElement waitUntilVisible(By locator) {
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
+	
+	/**
+	 * True-val tér vissza, ha az elem nem látható.
+	 */
+	protected Boolean waitUntilInvisible(By locator) {
+		return wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+	}
 
 	protected WebElement waitUntilClickable(By locator) {
 		return wait.until(ExpectedConditions.elementToBeClickable(locator));
@@ -75,6 +82,9 @@ public abstract class BasePage {
 		waitUntilVisible(locator).sendKeys(text);
 	}
 
+	/**
+	 * Kitörli a mező értékét és utána írja be az újat.
+	 */
 	protected void clearAndType(By locator, String text) {
 		WebElement element = waitUntilVisible(locator);
 		element.clear();

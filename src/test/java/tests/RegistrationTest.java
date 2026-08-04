@@ -1,51 +1,84 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Disabled;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import base.BaseTest;
-import utils.TestData;
-import pages.HomePage;
-import pages.RegisterPage;
+import pages.AccountPage;
+import utils.ConfigReader;
 
-// Selenium Page Object + Fluent Page Chaining
+// Selenium Page Object Model + Fluent Page Chaining
 class RegistrationTest extends BaseTest {
 
 	/**
-	 * Sikeres regisztráció ellenőrzése.
+	 * TC01 Sikeres regisztráció ellenőrzése.
 	 */
 	@Test
-	void successfulRegistrationTest() {		
-		assertEquals("Your registration completed",homePage.clickRegister()
-				.selectMaleGender()
-				.fillFirstName(TestData.generateFirstName())
-				.fillLastName(TestData.generateLastName())
-				.fillEmail(TestData.generateEmail())
-				.fillPassword(TestData.generatePassword()).clickRegistration().getResult());
+	@DisplayName("TC01 - Sikeres regisztráció és bejelentkezés ellenőrzése.")	
+	void successfulRegistrationTest() {			
+		
+		// Az idei évből kivon 20-at, és YYYY-MM-DD formátumra alakítja (pl. 2006-01-01).
+		// 18 és 75 év közöttinek kell lennie az új felhasználónak. 
+		String dateOfBirth = LocalDate.now().minusYears(20)
+		    .withMonth(1)
+		    .withDayOfMonth(1)
+		    .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		
+		 AccountPage accountPage = homePage.clickSignIn()
+			        .clickRegister()
+			        .fillFirstName(testData.getFirstName())
+			        .fillLastName(testData.getLastName())
+			        .fillDateOfBirth(dateOfBirth)
+			        .fillHouseNumber("10")
+			        .fillPostalCode("12345")
+			        .selectCountry("Hungary")
+			        .fillPhone("301234567")
+			        .fillEmail(testData.getEmail())
+			        .fillPassword(testData.getPassword())
+			        .clickRegister()
+			        .fillEmail(testData.getEmail())
+			        .fillPassword(testData.getPassword()).clickLogin();
+				 
+		assertEquals("Here you can manage your profile, favorites and orders."
+		,accountPage.getWelcomeMessage());
+		
+		 // Kijelentkezünk.
+	    accountPage.clickSignOut();
+	    
+	    // Fiók törlése az admin fiók segítségével. 
+	    // Ha épp más használja az admin fiókot, akkor a lenti sorokat ki lehet kommentezni ideiglenesen.      
+        homePage.clickSignIn()
+        .fillEmail(ConfigReader.getAdminEmail())
+        .fillPassword(ConfigReader.getAdminPassword())
+        .clickLogin().clickUsersList().clearAndTypeEmailAddressAndClickSearchBtn(testData.getEmail())
+        .clickDeleteUserBtn().clickSignOut();
 	}
 	
 	/**
-	 * Sikerestelen regisztráció ellenőrzése.
+	 * TC02 Sikertelen regisztráció ellenőrzése.
 	 */
-	@Disabled
 	@Test
-	void unsuccessfulRegistrationTest() {		
-
-	    RegisterPage registerPage = homePage.clickRegister();
-
-	    registerPage
-			.selectMaleGender()
-			.fillFirstName(TestData.generateFirstName())
-			.fillLastName(TestData.generateLastName())
-	        .fillEmail(TestData.generateEmail())
-	        .clickRegistration();
-
-	    assertEquals(
-	        "Password is required.",
-	        registerPage.getMissingPasswordErrorMessage()
-	    );
+	@DisplayName("TC02 - Sikertelen regisztráció kötelező keresztnév hiánya miatt.")
+	void unsuccessfulRegistrationTest() {			
+		
+		assertEquals("First name is required",homePage.clickSignIn()
+        .clickRegister()
+        .fillLastName(testData.getLastName())
+        .fillDateOfBirth("1990-01-01")
+        .fillHouseNumber("10")
+        .fillPostalCode("12345")
+        .selectCountry("Hungary")
+        .fillPhone("301234567")
+        .fillEmail(testData.getEmail())
+        .fillPassword(testData.getPassword())
+        .clickRegisterWithoutFluentPOM().getMissingFirstNameErrorMessage(null));	
+	
 	}
+	
 
 }

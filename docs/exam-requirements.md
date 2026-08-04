@@ -40,3 +40,4 @@ Automatikusan futnak-e a tesztek (benyújtott dokumentáció alapján pl. git pu
 Mennyire kidolgozott a vezetői tesztjelentés? (5 pont)
 Automatizált-e a tesztjelentés? (5 pont)
 Az vizsgaremek bemutatása során a vizsgázó előadásának szakszerűsége (5 pont)
+
