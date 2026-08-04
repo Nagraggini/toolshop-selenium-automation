@@ -7,6 +7,10 @@ amelyek alapján az automatizált Selenium tesztek elkészültek.
 
 Az alábbiakban részletesen, a vizsgaremek követelményeihez igazítva összegyűjtöttem a lépéseket és a teszteseteket a Practice Software Testing - Toolshop ([https://practicesoftwaretesting.com/](https://practicesoftwaretesting.com/)) webalkalmazáshoz, amely minden kötelező funkciót lefed.
 
+## Összefoglaló táblázat
+
+![Requirement table](images/requirement-table.png)
+
 ## TC01 Regisztráció
 
 Teszt rövid leírása: Új felhasználói fiók sikeres létrehozása.
