@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <!-- Konzolra írás, hogy futtatás közben is látszódjon mi történik épp. -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <!-- Fájl alapú logolás. -->
+        <RollingFile name="FileLogger" 
+                     fileName="target/logs/test-execution.log"
+                     filePattern="target/logs/history/test-execution-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <!-- Automatikus rotáció: ha eléri a 10MB-ot, új fájlba ment. -->
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+                <!-- Vagy naponta újat nyit -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <!-- Maximum 5 archív fájlt őriz meg, a többit törli/tömöríti. -->
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileLogger"/>
+        </Root>
+    </Loggers>
+</Configuration>

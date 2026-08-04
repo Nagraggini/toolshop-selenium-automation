@@ -26,10 +26,15 @@ public class BaseTest {
 	protected TestData testData;
 	
 	@BeforeEach
-	void setUp() {		
+	void setUp(org.junit.jupiter.api.TestInfo testInfo) {		
 		driver = DriverFactory.createDriver(System.getProperty("CI") != null); // headless CI-ben
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		
+		// Kiírjuk a logba az induló teszt nevét.
+        logger.info("//==================================================");
+        logger.info(" TESZT NEVE: " + testInfo.getDisplayName());
+        logger.info("//==================================================");
+        
 		homePage = new HomePage(driver);
 		homePage.open();
 		testData=new TestData();
@@ -37,7 +42,13 @@ public class BaseTest {
 
 	
 	@AfterEach
-	void tearDown() {
+	void tearDown(org.junit.jupiter.api.TestInfo testInfo) {
+		// Kiírjuk a logba az induló teszt nevét.
+		  logger.info("//==================================================");
+	      logger.info(" 		TESZT VÉGE");
+	      logger.info("//==================================================");
+	        
+	        
 		// Bezárja az összes ablakot és teljesen leállítja a WebDriver-t.
 		if (driver != null) {
 			driver.quit();
