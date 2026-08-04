@@ -112,7 +112,7 @@ Elemek darabszámának ellenőrzése. (9 db)
 
 Elvárt eredmény: A termékek listája hiba nélkül betöltődik, és a tételek láthatóvá válnak a felhasználó számára.
 
-## TC06 Termékek meglétének ellenőrzése
+## TC06 Termékek nevének meglétének ellenőrzése
 
 Teszt rövid leírása: A megjelenő terméklistában ellenőrizzük, hogy az elvárt termékek megtalálhatóak-e.
 
@@ -199,8 +199,31 @@ Minden egyes felhasználónál az alábbi lépések végrehajtása:
 
 Elvárt eredmény: A rendszer a CSV-ben szereplő összes felhasználót hiba nélkül regisztrálja, a bejelentkezés minden esetben sikeresen megtörténik (a felhasználó neve megjelenik a menüben), és a teszt végigfut hibamentesen a teljes adatsoron. 
 
+## TC10 Meglévő adat módosítás és törlés
 
-## TC10 Adatok lementése felületről
+Teszt rövid leírása: Termék kosárba helyezése, mennyiségének ellenőrzése, módosítása és törlése, majd újabb termék hozzáadása és a kosár tartalmának ürítése.
+
+Teszt lépések:
+
+Navigáció a [https://practicesoftwaretesting.com/](https://practicesoftwaretesting.com/] weboldalra.
+
+Bejelentkezés admin fiókkal a jobb felső sarokban található "Sign in" gombon keresztül (az adatok a .env fájból kerülnek betöltésre az admin felhazsnálóval, mert a többinél előfordulhat, hogy elfogyott az adott termék).
+
+Megnyitjuk a főoldalt, majd egy kiválasztott termék (pl. "Combination Pliers") részleteinek megnyitása és kosárba helyezése az "Add to cart" gomb segítségével.
+
+A kosár oldalra (/checkout) navigálás, majd annak ellenőrzése, hogy a termékből pontosan 1 darab szerepel-e a kosárban.
+
+A termék törlése a kosárból a törlés gomb segítségével, és annak validálása, hogy a kosár üres állapotot jelez a "The cart is empty. Nothing to display." üzenet látható-e.
+
+Egy másik termék (pl. "Bolt Cutters") kiválasztása, majd a mennyiség átállítása 5-re (az előző 1-est töröljük) és kosárba helyezése.
+
+A kosár oldalra visszatérve annak ellenőrzése, hogy az új termék mennyisége már 5 darabként látható-e.
+
+A termék törlése a kosárból, végül pedig a kijelentkezés ("Sign out" gombbal).
+
+Elvárt eredmény: A kosár helyesen kezeli a hozzáadott tételeket, a mennyiségi adatok pontosan frissülnek a megadott értékre (5), a törlési műveletek sikeresen kiürítik a kosarat, és a folyamat végén a felhasználó szabályosan kijelentkezik.
+
+## TC11 Adatok lementése felületről
 
 Teszt rövid leírása: A főoldalon megjelenő adatok, vagyis terméknevek és árak kiolvasása, valamint fájlba mentése.
 

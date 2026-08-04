@@ -31,7 +31,7 @@ class ProductListTest extends BaseTest{
     	,"Hammer","Claw Hammer", "Thor Hammer"})
     @Tag("ui")
     @Tag("regression")    
-    @DisplayName("Leellenőrizzük, hogy az összes termék neve megjelenik-e.")
+    @DisplayName("TC06 - Leellenőrizzük, hogy az összes termék neve megjelenik-e.")
     void checkProductNamesTest(String itemName) {
            assertTrue(homePage.getAllProductNames().contains(itemName),
         		    "Ez a termék nem található: " + itemName);

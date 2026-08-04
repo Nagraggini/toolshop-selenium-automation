@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import base.BaseTest;
@@ -14,6 +15,7 @@ class ModifyCartItemQuantityTest extends BaseTest {
 	 * TC10 Adatmódosítás a mennyiségen keresztül.
 	 */
 	@Test
+	@DisplayName("TC10 - Adatmódosítás a mennyiségen keresztül.")
 	void addProductChangeQuantityViaReadAndRemove() {
 		String productName1="Combination Pliers";
 		

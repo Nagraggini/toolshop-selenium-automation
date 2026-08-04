@@ -14,11 +14,11 @@ import base.BaseTest;
 class ExportProductNameAndTheirPrices extends BaseTest {
 	
 	/**
-	 * TC10 Adatok lementése felületről .csv fájlba.
+	 * TC11 Adatok lementése felületről .csv fájlba.
 	 * @throws Exception
 	 */
 	@Test
-	@DisplayName("TC10 - Termékek exportálása CSV fájlba")
+	@DisplayName("TC11 - Termékek exportálása CSV fájlba")
 	void exportProductsToCsvTest() throws Exception {
 		/* A HomePage-en van egy metódus
 		, ami visszaadja a termékeket (név + ár párokként). */

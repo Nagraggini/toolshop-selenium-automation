@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import base.BaseTest;
@@ -22,6 +23,7 @@ class BulkRegistrationFromCsvTest extends BaseTest{
      * TC09 Ismételt és sorozatos adatbevitel adatforrásból
      */
     @Test
+    @DisplayName("TC09 - Ismételt és sorozatos adatbevitel adatforrásból")
     void registerMultipleUsersFromCsv() {
         // Betöltjük a felhasználókat a CSV/Excel erőforrásból.
         List<User> users = UsersCsv.loadUsersFromResource("data/users.csv");
@@ -40,6 +42,7 @@ class BulkRegistrationFromCsvTest extends BaseTest{
             registerPage
                     .fillFirstName(u.firstName())
                     .fillLastName(u.lastName())
+                    // 18 és 75 év közöttinek kell lennie az új felhasználónak. 
                     .fillDateOfBirth(u.dateOfBirth())
                     .fillStreet(u.street())
                     .fillHouseNumber(u.houseNumber())
@@ -67,6 +70,7 @@ class BulkRegistrationFromCsvTest extends BaseTest{
             loggedInAccount.clickSignOut();
             
             // Fiók törlése az admin fiók segítségével. 
+            // Ha épp más használja az admin fiókot, akkor a lenti sorokat ki lehet kommentezni ideiglenesen.            
             homePage.clickSignIn()
             .fillEmail(ConfigReader.getAdminEmail())
             .fillPassword(ConfigReader.getAdminPassword())
