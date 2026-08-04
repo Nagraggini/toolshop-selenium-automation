@@ -43,7 +43,7 @@ public class ProductPage extends BasePage {
      * Rákattint a kosár ikonra a navigációs sávban, és átnavigál a kosár oldalra.
      */
 	public CartPage clickCart() {
-        // Megvárjuk, hogy a kosár ikon jelen legyen a DOM-ban
+        // Megvárjuk, hogy a kosár ikon jelen legyen a DOM-ban.
         WebElement cartElement = wait.until(ExpectedConditions.presenceOfElementLocated(cartIcon));
         
         // JavaScript kattintással kényszerítjük ki, így a toast üzenet nem zavar be
