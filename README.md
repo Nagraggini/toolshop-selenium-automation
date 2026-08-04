@@ -21,4 +21,4 @@ win-on: `mvnw clean test`
 
 # Jelentés letöltése
 
-Az artifact-t megtalálható a github actions-ben, ha az adott workflow-ra kattintunk és alul a `surfire-reports` letölthető egy zip-ben. 
+Az jelentés megtalálható a GitHub-on az Actions fülön, ha az adott workflow-ra kattintunk lejebb görgetünk az Artifacts részen letölthető a `surfire-reports` egy zip-ben. 
