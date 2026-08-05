@@ -43,6 +43,10 @@ public abstract class BasePage {
 	protected WebElement waitUntilVisible(By locator) {
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
+
+	protected List<WebElement> waitUntilAllVisibleElements(By locator) {
+		return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+	}
 	
 	/**
 	 * True-val tér vissza, ha az elem nem látható.
@@ -75,7 +79,11 @@ public abstract class BasePage {
 	// III. kényelmi metódusok, interakciók
 	protected void click(By locator) {
 		logger.info(" Clicking on element: {}", locator);
+		// Láthatóságra várunk.
+		waitUntilVisible(locator);
+		// Kattinthatóságra várunk.
 		waitUntilClickable(locator).click();
+		
 	}
 
 	protected void type(By locator, String text) {
