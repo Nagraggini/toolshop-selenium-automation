@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import base.BaseTest;
 import pages.CartPage;
-import utils.ConfigReader;
 
 class ModifyCartItemQuantityTest extends BaseTest {
 
@@ -17,12 +16,9 @@ class ModifyCartItemQuantityTest extends BaseTest {
 	@Test
 	@DisplayName("TC10 - Adatmódosítás a mennyiségen keresztül.")
 	void addProductChangeQuantityViaReadAndRemove() {
-		String productName1="Combination Pliers";
+		String productName1="Pliers";
 		
-		CartPage cartPage=homePage.clickSignIn()
-	            .fillEmail(ConfigReader.getAdminEmail())
-	            .fillPassword(ConfigReader.getAdminPassword())
-	            .clickLogin().clickHome().clickSpecificItem(productName1).addToCart()
+		CartPage cartPage=homePage.clickSpecificItem(productName1).addToCart()
 	            .clickCart();
 		
 		assertEquals("1",cartPage.getQuantityInputByProductName(productName1)
@@ -40,8 +36,6 @@ class ModifyCartItemQuantityTest extends BaseTest {
 		// Kivesszük a termékeket a kosárból.
 		cartPage.clickDeleteButtonByProductName(productName2);	
 		
-		// Kijelentkezés.
-		cartPage.clickHome().clickSignOut();
 	}
 
 }
