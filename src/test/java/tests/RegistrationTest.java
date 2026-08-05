@@ -52,7 +52,8 @@ class RegistrationTest extends BaseTest {
 	    
 	    // Fiók törlése az admin fiók segítségével. 
 	    // Ha épp más használja az admin fiókot, akkor a lenti sorokat ki lehet kommentezni ideiglenesen.      
-        homePage.clickSignIn()
+	    // Az oldal pár perc múlva automatikusan törli az új felhasználókat. 
+	    homePage.clickSignIn()
         .fillEmail(ConfigReader.getAdminEmail())
         .fillPassword(ConfigReader.getAdminPassword())
         .clickLogin().clickUsersList().clearAndTypeEmailAddressAndClickSearchBtn(testData.getEmail())
