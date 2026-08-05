@@ -13,8 +13,11 @@ public class DriverFactory {
         options.addArguments("--incognito");
         options.addArguments("--remote-allow-origins=*");
         //disable-dev-shm-usage arra jó, hogy a Chrome nem a memóriát használja, hanem egy ideigleneset pl.: temp
-        options.addArguments("--window-size=1920,1080", "--disable-dev-shm-usage",
-                "--disable-notifications");
+        options.addArguments( "--headless=new",
+                "--window-size=1920,1080",
+                "--no-sandbox",
+                "--disable-dev-shm-usage",
+                "--disable-gpu");
         
         // Így localban, sem fog megnyílni a böngésző.
         headless = true;
