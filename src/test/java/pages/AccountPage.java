@@ -28,6 +28,7 @@ public class AccountPage extends BasePage {
 	        ExpectedConditions.textToBe(pageTitle, "My account"),
 	        ExpectedConditions.textToBe(pageTitle, "Sales over the years")
 	    ));
+	    waitUntilVisible(navMenuBtn);
 	}
 
 	/**
@@ -61,6 +62,13 @@ public class AccountPage extends BasePage {
 		click(navMenuBtn);
 		click(signOutBtn);
 		return new LoginPage(driver);
+	}
+	
+	/**
+	 * Megnézzük, hogy látható-e a felhasználó teljesneve.
+	*/
+	public boolean isUserMenuDisplayed() {
+	    return isDisplayed(navMenuBtn);
 	}
 
 }
