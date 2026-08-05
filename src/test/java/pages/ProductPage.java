@@ -36,7 +36,7 @@ public class ProductPage extends BasePage {
 	 */
 	public ProductPage addToCart() {
 		click(addToCartBtn);
-		return new ProductPage (driver);
+		return this;
 	}
 	
 	/**
