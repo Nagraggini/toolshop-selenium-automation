@@ -36,42 +36,42 @@ public class RegisterPage extends BasePage {
 	}
 
 	 public RegisterPage fillFirstName(String firstName) {
-	        driver.findElement(firstNameInput).sendKeys(firstName);
+			clearAndType(firstNameInput, firstName);		  
 	        return this;
 	    }
 
 
-	    public RegisterPage fillLastName(String lastName) {
-	        driver.findElement(lastNameInput).sendKeys(lastName);
+	    public RegisterPage fillLastName(String lastName) {	      
+	    	clearAndType(lastNameInput, lastName);	
 	        return this;
 	    }
 
 
 	    public RegisterPage fillDateOfBirth(String dateOfBirth) {
-	        driver.findElement(dateOfBirthInput).sendKeys(dateOfBirth);
+	     	clearAndType(dateOfBirthInput, dateOfBirth);		      
 	        return this;
 	    }
 
 
 	    public RegisterPage fillStreet(String street) {
-	        driver.findElement(streetInput).sendKeys(street);
+	    	clearAndType(streetInput, street);		      
 	        return this;
 	    }
 	    
 	    public RegisterPage fillHouseNumber(String number) {
-	        driver.findElement(houseNumberInput).sendKeys(number);
+	       	clearAndType(houseNumberInput, number);		    
 	        return this;
 	    }
 
 
 	    public RegisterPage fillPostalCode(String postalCode) {
-	        driver.findElement(postalCodeInput).sendKeys(postalCode);
+	       	clearAndType(postalCodeInput, postalCode);	  	
 	        return this;
 	    }
 
 
 	    public RegisterPage fillCity(String city) {
-	        driver.findElement(cityInput).sendKeys(city);
+	    	clearAndType(cityInput, city);	   
 	        return this;
 	    }
 
@@ -90,25 +90,25 @@ public class RegisterPage extends BasePage {
 
 
 	    public RegisterPage fillPhone(String phone) {
-	        driver.findElement(phoneInput).sendKeys(phone);
+	    	clearAndType(phoneInput, phone);
 	        return this;
 	    }
 
 
 	    public RegisterPage fillEmail(String email) {
-	        driver.findElement(emailInput).sendKeys(email);
+	        clearAndType(emailInput, email);
 	        return this;
 	    }
 
 
 	    public RegisterPage fillPassword(String password) {
-	        driver.findElement(passwordInput).sendKeys(password);
+	    	clearAndType(passwordInput, password);	      
 	        return this;
 	    }
 
 
 	    public LoginPage clickRegister() {
-	        driver.findElement(registerButton).click();
+	    	click(registerButton);
 	        return new LoginPage(driver);
 	    }
 	    

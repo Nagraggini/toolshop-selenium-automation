@@ -21,12 +21,12 @@ public class LoginPage extends BasePage {
 	}
 
 	public LoginPage fillEmail(String email) {
-		driver.findElement(emailInput).sendKeys(email);
+		 clearAndType(emailInput, email);
 		return this;
 	}
 
 	public LoginPage fillPassword(String password) {
-		driver.findElement(passwordInput).sendKeys(password);
+		clearAndType(passwordInput, password);
 		return this;
 	}
 
