@@ -53,15 +53,8 @@ public class HomePage extends BasePage{
 	    System.out.println("nav-home elemek száma: "
 	            + driver.findElements(homeBtn).size());
 	    
-	    try {
 	        waitUntilVisible(homeBtn);
 	        return this;
-
-	    } catch (org.openqa.selenium.TimeoutException e) {
-	        saveDebugFiles();
-	        throw e;
-	    }
-	    return this;
 	}
 	
 	public LoginPage clickSignIn() {	
@@ -163,49 +156,6 @@ public class HomePage extends BasePage{
         }
         
         return productData;
-    }
-    
-    private void saveDebugFiles() {
-        try {
-            java.nio.file.Path debugDirectory =
-                    java.nio.file.Path.of("target", "debug");
+    }    
 
-            java.nio.file.Files.createDirectories(debugDirectory);
-
-            String timestamp = String.valueOf(System.currentTimeMillis());
-
-            java.io.File screenshot =
-                    ((org.openqa.selenium.TakesScreenshot) driver)
-                            .getScreenshotAs(
-                                    org.openqa.selenium.OutputType.FILE
-                            );
-
-            java.nio.file.Files.copy(
-                    screenshot.toPath(),
-                    debugDirectory.resolve(
-                            "homepage-" + timestamp + ".png"
-                    ),
-                    java.nio.file.StandardCopyOption.REPLACE_EXISTING
-            );
-
-            java.nio.file.Files.writeString(
-                    debugDirectory.resolve(
-                            "homepage-" + timestamp + ".html"
-                    ),
-                    driver.getPageSource(),
-                    java.nio.charset.StandardCharsets.UTF_8
-            );
-
-            System.err.println(
-                    "Hibakeresési fájlok elmentve: "
-                            + debugDirectory.toAbsolutePath()
-            );
-
-        } catch (Exception debugException) {
-            System.err.println(
-                    "Nem sikerült elmenteni a hibakeresési fájlokat: "
-                            + debugException.getMessage()
-            );
-        }
-    }
 }
