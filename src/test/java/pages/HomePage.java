@@ -4,15 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasePage{
 
+	private final By pageContent = By.cssSelector("app-root");
 	private final By pageLogo = By.cssSelector("a.navbar-brand");
 	
 	// A kategória menü lenyitása. 
+	private final By homeBtn = By.cssSelector("[data-test='nav-home']");
 	private final By categoriesDropdown = By.cssSelector("[data-test='nav-categories']");
 	private final By contactBtn = By.cssSelector("[data-test='nav-contact']");
 	private final By signInBtn = By.cssSelector("[data-test='nav-sign-in']");	
@@ -37,20 +40,21 @@ public class HomePage extends BasePage{
 	private final By noProductsMessage = By.cssSelector("[data-test='category-empty']");
 		
 	public HomePage(WebDriver driver) {
-		super(driver);			
+		super(driver);		
 	}
 	
 	/**
-	 * Megnyitja a weboldalt.
+	 * Megnyitja a weboldalt és validálja is.
 	 */
-	public void open() {		
-		driver.get("https://practicesoftwaretesting.com/");	
-		// Validáljuk, hogy betöltött-e az oldal. Oldal szintű várakoztatás.
-		wait.until(ExpectedConditions.visibilityOfElementLocated(pageLogo));
+	public HomePage open() {
+	    driver.get("https://practicesoftwaretesting.com/");
+	 // Validáljuk, hogy betöltött-e az oldal. Oldal szintű várakoztatás.
+	    wait.until(ExpectedConditions.visibilityOfElementLocated(pageContent));
+	    return this;
 	}
 	
 	public LoginPage clickSignIn() {	
-	    click(signInBtn);
+	    click(signInBtn);	    
 	    return new LoginPage(driver);
 	}	
 	
@@ -60,19 +64,24 @@ public class HomePage extends BasePage{
 	}
 	
 	public List<String> getAllProductNames() {
-	    // Megvárjuk, hogy megjelenjenek a termékkártyák.
-	    waitForAllElementsPresent(productNames);
+	    // Kategóriaváltáskor az Angular újrarendereli a kártyákat, ezért stale elem
+	    // esetén a wait következő próbálkozása frissen keresi meg őket.
+	    return wait.until(driver -> {
+	        try {
+	            List<WebElement> productNameElements = driver.findElements(productNames);
+	            if (productNameElements.isEmpty()) {
+	                return null;
+	            }
 
-	    List<WebElement> productNameElements = findAll(productNames);
-
-	    List<String> productNames = new ArrayList<>();
-
-	    for (WebElement itemName : productNameElements) {
-	        // trim() eltávolítja a felesleges szóközöket az elejéről és a végéről.
-	        productNames.add(itemName.getText().trim());
-	    }
-
-	    return productNames;
+	            List<String> names = new ArrayList<>();
+	            for (WebElement itemName : productNameElements) {
+	                names.add(itemName.getText().trim());
+	            }
+	            return names;
+	        } catch (StaleElementReferenceException e) {
+	            return null;
+	        }
+	    });
 	}
 	
 	public HomePage clickHandToolsCategory() {
@@ -118,7 +127,7 @@ public class HomePage extends BasePage{
 		
 	}
 	
-	public HomePage clickSignOut() {
+	public HomePage clickSignOut() {	    
 		click(navMenuBtn);
 		click(signOutBtn);
 		return this;
