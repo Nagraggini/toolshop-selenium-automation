@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ class BulkRegistrationFromCsvTest extends BaseTest{
      */
     @Test
     @DisplayName("TC09 - Ismételt és sorozatos adatbevitel adatforrásból")
-    void registerMultipleUsersFromCsv() {
+    void registerMultipleUsersFromCsv(org.junit.jupiter.api.TestInfo testInfo) {
         // Betöltjük a felhasználókat a CSV/Excel erőforrásból.
         List<User> users = UsersCsv.loadUsersFromResource("data/users.csv");
         assertFalse(users.isEmpty(), "A felhasználók listája nem lehet üres!");
@@ -55,6 +56,8 @@ class BulkRegistrationFromCsvTest extends BaseTest{
                     .fillPassword(u.password())
                     .clickRegister(); // Visszaadja a LoginPage-t sikeres regisztráció után
 
+            logger.info(" Sikeresen regisztráltuk ezt az email címet: " + u.email());
+            
             // Bejelentkezés az újonnan regisztrált fiókkal
             // A sikeres regisztráció után a Login oldalra dob át a rendszer.
             loginPage.fillEmail(u.email())
@@ -62,20 +65,26 @@ class BulkRegistrationFromCsvTest extends BaseTest{
             
             AccountPage loggedInAccount = loginPage.clickLogin();
 
-            // Ellenőrzés, hogy sikeres volt-e a bejelentkezés (My account oldal betöltődött).
-            assertNotNull(loggedInAccount.getUserFullName(), 
-            		"A felhasználó nevének látszódnia kell a menüben!");
+            System.out.println(driver.getCurrentUrl());
+            System.out.println(driver.getPageSource().contains("Users"));
+            
+            // Ellenőrzés, hogy sikeres volt-e a bejelentkezés, látható-e a felhasználó teljesneve.
+            assertTrue(
+                    loggedInAccount.isUserMenuDisplayed(),
+                    "A felhasználói menünek meg kell jelennie a bejelentkezés után!"
+            );
 
             // Kijelentkezés a következő kör előtt (ha szükséges, vagy törlés ha biztosítva van).
             loggedInAccount.clickSignOut();
             
             // Fiók törlése az admin fiók segítségével. 
             // Ha épp más használja az admin fiókot, akkor a lenti sorokat ki lehet kommentezni ideiglenesen.            
-            homePage.clickSignIn()
+            // Az oldal pár perc múlva automatikusan törli az új felhasználókat. 
+            /*homePage.clickSignIn()
             .fillEmail(ConfigReader.getAdminEmail())
             .fillPassword(ConfigReader.getAdminPassword())
             .clickLogin().clickUsersList().clearAndTypeEmailAddressAndClickSearchBtn(u.email())
-            .clickDeleteUserBtn().clickSignOut();
+            .clickDeleteUserBtn().clickSignOut();*/
         }
                 
     }
