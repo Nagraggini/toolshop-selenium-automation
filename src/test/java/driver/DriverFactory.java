@@ -11,10 +11,10 @@ public class DriverFactory {
         ChromeOptions options = new ChromeOptions();
 
         options.addArguments("--incognito");
-        options.addArguments("--remote-allow-origins=*");     
-        
+        options.addArguments("--remote-allow-origins=*");
+
         // Így localban, sem fog megnyílni a böngésző.
-        headless = true;
+        //headless = true;
 
         if (headless) {
             options.addArguments("--headless=new");
