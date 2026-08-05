@@ -16,7 +16,7 @@ class ModifyCartItemQuantityTest extends BaseTest {
 	@Test
 	@DisplayName("TC10 - Adatmódosítás a mennyiségen keresztül.")
 	void addProductChangeQuantityViaReadAndRemove() {
-		String productName1="Pliers";
+		String productName1="Combination Pliers";
 		
 		CartPage cartPage=homePage.clickSpecificItem(productName1).addToCart()
 	            .clickCart();
