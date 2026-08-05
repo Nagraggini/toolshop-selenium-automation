@@ -10,8 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasePage{
-
-	private final By pageContent = By.cssSelector("app-root");
+	
 	private final By pageLogo = By.cssSelector("a.navbar-brand");
 	
 	// A kategória menü lenyitása. 
@@ -48,8 +47,8 @@ public class HomePage extends BasePage{
 	 */
 	public HomePage open() {
 	    driver.get("https://practicesoftwaretesting.com/");
-	 // Validáljuk, hogy betöltött-e az oldal. Oldal szintű várakoztatás.
-	    wait.until(ExpectedConditions.visibilityOfElementLocated(pageContent));
+	    // Validáljuk, hogy betöltött-e az oldal. Oldal szintű várakoztatás.
+	    waitUntilVisible(homeBtn);
 	    return this;
 	}
 	
