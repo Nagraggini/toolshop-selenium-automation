@@ -1,11 +1,9 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,13 +12,12 @@ import pages.AccountPage;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.RegisterPage;
-import utils.ConfigReader;
 import utils.User;
 import utils.UsersCsv;
 
-class BulkRegistrationFromCsvTest extends BaseTest{
+class BulkRegistrationFromCsvTest extends BaseTest {
 
-	/**
+    /**
      * TC09 Ismételt és sorozatos adatbevitel adatforrásból
      */
     @Test
@@ -43,7 +40,7 @@ class BulkRegistrationFromCsvTest extends BaseTest{
             registerPage
                     .fillFirstName(u.firstName())
                     .fillLastName(u.lastName())
-                    // 18 és 75 év közöttinek kell lennie az új felhasználónak. 
+                    // 18 és 75 év közöttinek kell lennie az új felhasználónak.
                     .fillDateOfBirth(u.dateOfBirth())
                     .fillStreet(u.street())
                     .fillHouseNumber(u.houseNumber())
@@ -57,35 +54,41 @@ class BulkRegistrationFromCsvTest extends BaseTest{
                     .clickRegister(); // Visszaadja a LoginPage-t sikeres regisztráció után
 
             logger.info(" Sikeresen regisztráltuk ezt az email címet: " + u.email());
-            
+
             // Bejelentkezés az újonnan regisztrált fiókkal
             // A sikeres regisztráció után a Login oldalra dob át a rendszer.
             loginPage.fillEmail(u.email())
-                     .fillPassword(u.password());
-            
+                    .fillPassword(u.password());
+
             AccountPage loggedInAccount = loginPage.clickLogin();
 
             System.out.println(driver.getCurrentUrl());
-            System.out.println(driver.getPageSource().contains("Users"));
-            
-            // Ellenőrzés, hogy sikeres volt-e a bejelentkezés, látható-e a felhasználó teljesneve.
+            System.out.println(
+                    "A getPageSource() tartamazza-e a Users szót: " + driver.getPageSource().contains("Users"));
+
+            // Ellenőrzés, hogy sikeres volt-e a bejelentkezés, látható-e a felhasználó
+            // teljesneve.
             assertTrue(
                     loggedInAccount.isUserMenuDisplayed(),
-                    "A felhasználói menünek meg kell jelennie a bejelentkezés után!"
-            );
+                    "A felhasználói menünek meg kell jelennie a bejelentkezés után!");
 
-            // Kijelentkezés a következő kör előtt (ha szükséges, vagy törlés ha biztosítva van).
+            // Kijelentkezés a következő kör előtt (ha szükséges, vagy törlés ha biztosítva
+            // van).
             loggedInAccount.clickSignOut();
-            
-            // Fiók törlése az admin fiók segítségével. 
-            // Ha épp más használja az admin fiókot, akkor a lenti sorokat ki lehet kommentezni ideiglenesen.            
-            // Az oldal pár perc múlva automatikusan törli az új felhasználókat. 
-            /*homePage.clickSignIn()
-            .fillEmail(ConfigReader.getAdminEmail())
-            .fillPassword(ConfigReader.getAdminPassword())
-            .clickLogin().clickUsersList().clearAndTypeEmailAddressAndClickSearchBtn(u.email())
-            .clickDeleteUserBtn().clickSignOut();*/
+
+            // Fiók törlése az admin fiók segítségével.
+            // Ha épp más használja az admin fiókot, akkor a lenti sorokat ki lehet
+            // kommentezni ideiglenesen.
+            // Az oldal pár perc múlva automatikusan törli az új felhasználókat.
+            /*
+             * homePage.clickSignIn()
+             * .fillEmail(ConfigReader.getAdminEmail())
+             * .fillPassword(ConfigReader.getAdminPassword())
+             * .clickLogin().clickUsersList().clearAndTypeEmailAddressAndClickSearchBtn(u.
+             * email())
+             * .clickDeleteUserBtn().clickSignOut();
+             */
         }
-                
+
     }
 }
