@@ -5,7 +5,7 @@ Készítette: Freud Andrea
 Tesztelt webalkalmazás: [https://practicesoftwaretesting.com/](https://practicesoftwaretesting.com/)
 
 Futattás:
-linux-on: `./mvnw clean test`
+linux-on és macOS-en: `./mvnw clean test`
 
 win-on: `mvnw clean test`
 
