@@ -6,12 +6,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import driver.DriverFactory;
 import pages.HomePage;
 import utils.TestData;
+import utils.ScreenshotOnFailure;
 
 public class BaseTest {
 
@@ -21,6 +23,12 @@ public class BaseTest {
 
 	// Logoláshoz.
 	protected static final Logger logger = LogManager.getLogger(BaseTest.class);
+	
+	// Screenshot készítéshez. Átadjuk az aktuális driver-t.
+	@RegisterExtension
+    ScreenshotOnFailure screenshotExtension =
+            new ScreenshotOnFailure(() -> driver);
+
 	
 	protected HomePage homePage;
 	protected TestData testData;
