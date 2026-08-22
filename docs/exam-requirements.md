@@ -1,4 +1,4 @@
-Web alkalmazás felület tesztelési vizsgaremek vizsgarész
+# Web alkalmazás felület tesztelési vizsgaremek vizsgarész
 
 A vizsgázónak a vizsgát megelőzően egy komplex web alkalmazás alapján felület tesztelési projektet kell elkészítenie, saját döntése alapján egy egyénileg választott web alkalmazás alapján.
 

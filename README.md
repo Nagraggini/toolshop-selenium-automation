@@ -7,7 +7,7 @@ Tesztelt webalkalmazás: [https://practicesoftwaretesting.com/](https://practice
 Futattás:
 linux-on és macOS-en: `./mvnw clean test`
 
-win-on: `mvnw clean test`
+windows-on: `mvnw clean test`
 
 # Tech Stack
 
