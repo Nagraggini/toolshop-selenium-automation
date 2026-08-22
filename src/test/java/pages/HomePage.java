@@ -50,8 +50,8 @@ public class HomePage extends BasePage {
 		System.out.println("Aktuális URL: " + driver.getCurrentUrl());
 		System.out.println("Oldal címe: " + driver.getTitle());
 		System.out.println("HTML hossza: " + driver.getPageSource().length());
-		System.out.println("nav-home elemek száma: "
-				+ driver.findElements(homeBtn).size());
+		System.out.println("A nav-home elem megjelent-e: " 
+				+ (driver.findElements(homeBtn).size()>0));
 
 		waitUntilVisible(homeBtn);
 		return this;
