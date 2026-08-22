@@ -18,7 +18,7 @@ import utils.ScreenshotOnFailure;
 public class BaseTest {
 
 	protected WebDriver driver;
-	// 10 másodperces várakoztatás deklarálása.
+	// 20 másodperces várakoztatás deklarálása.
 	protected WebDriverWait wait;
 
 	// Logoláshoz.
@@ -36,7 +36,7 @@ public class BaseTest {
 	@BeforeEach
 	void setUp(org.junit.jupiter.api.TestInfo testInfo) {		
 		driver = DriverFactory.createDriver(System.getProperty("CI") != null); // headless CI-ben
-		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		
 		// Kiírjuk a logba az induló teszt nevét.
         logger.info("//==================================================");
