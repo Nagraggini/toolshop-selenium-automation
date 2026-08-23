@@ -10,7 +10,7 @@ A `manual-test-cases.md` fájlban található a részletes dokumentáció minden
 
 A `requirement-table.xls` fájlban található a táblázat, hogy melyik teszt melyik vizsga követelményt fedi le.
 
-## Tesztesetek eggyesével futtatásához 
+## Tesztesetek egyesével futtatásához 
 
 ./mvnw test -Dtest=RegistrationTest#successfulRegistrationTest
 
