@@ -6,13 +6,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import base.BaseTest;
 import pages.AccountPage;
 import utils.ConfigReader;
 
-// Selenium Page Object Model + Fluent Page Chaining
+@Tag("ui")
+@Tag("regression")
 class RegistrationTest extends BaseTest {
 
 	/**

@@ -5,6 +5,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import base.BaseTest;
@@ -15,6 +16,8 @@ import pages.RegisterPage;
 import utils.User;
 import utils.UsersCsv;
 
+@Tag("ui")
+@Tag("regression")
 class BulkRegistrationFromCsvTest extends BaseTest {
 
     /**

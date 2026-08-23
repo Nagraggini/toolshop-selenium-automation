@@ -6,12 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import base.BaseTest;
 import pages.ContactPage;
 import pages.HomePage;
 
+@Tag("ui")
+@Tag("regression")
 class ContactUsTest extends BaseTest{
 
 	/**

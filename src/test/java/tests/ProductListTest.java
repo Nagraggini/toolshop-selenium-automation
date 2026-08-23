@@ -10,6 +10,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import base.BaseTest;
 
+@Tag("ui")
+@Tag("regression")
 class ProductListTest extends BaseTest{
 
 	/**
@@ -29,8 +31,6 @@ class ProductListTest extends BaseTest{
     @CsvSource({ "Combination Pliers", "Pliers","Bolt Cutters",
     	"Long Nose Pliers","Slip Joint Pliers", "Claw Hammer with Shock Reduction Grip"
     	,"Hammer","Claw Hammer", "Thor Hammer"})
-    @Tag("ui")
-    @Tag("regression")    
     @DisplayName("TC06 - Leellenőrizzük, hogy az összes termék neve megjelenik-e.")
     void checkProductNamesTest(String itemName) {
            assertTrue(homePage.getAllProductNames().contains(itemName),

@@ -7,10 +7,13 @@ import java.nio.file.Path;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import base.BaseTest;
 
+@Tag("ui")
+@Tag("regression")
 class ExportProductNameAndTheirPrices extends BaseTest {
 	
 	/**
