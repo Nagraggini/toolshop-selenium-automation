@@ -4,6 +4,10 @@
   <artifactId>vizsgaremek-fa-260117</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
+	 <name>e-commerce-toolshop</name>
+
+    <url>practicesoftwaretesting.com/</url>
+	
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>21</maven.compiler.release>
