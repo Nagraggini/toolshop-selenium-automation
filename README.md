@@ -2,9 +2,11 @@
 
 Készítette: Freud Andrea
 
-Tesztelt webalkalmazás: [https://practicesoftwaretesting.com/](https://practicesoftwaretesting.com/)
+**Tesztelt webalkalmazás:** [https://practicesoftwaretesting.com/](https://practicesoftwaretesting.com/)
 
-Futattás:
+**Teszt környezet:** Chrome böngésző; 1920×1080; internet hozzáférés
+
+Futtatás:
 linux-on és macOS-en: `./mvnw clean test`
 
 windows-on: `mvnw clean test`
