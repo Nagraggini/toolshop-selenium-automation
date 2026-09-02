@@ -43,7 +43,7 @@ public class HomePage extends BasePage {
 	 * Megnyitja a weboldalt és validálja is.
 	 */
 	public HomePage open() {
-		driver.get("https://practicesoftwaretesting.com/");
+		//driver.get("https://practicesoftwaretesting.com/");
 		// Validáljuk, hogy betöltött-e az oldal. Oldal szintű várakoztatás.
 
 		System.out.println("HomePage open() metódus: ");

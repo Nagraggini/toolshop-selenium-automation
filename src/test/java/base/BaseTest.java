@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import driver.DriverFactory;
 import pages.HomePage;
 import utils.TestData;
+import utils.ConfigReader;
 import utils.ScreenshotOnFailure;
 
 public class BaseTest {
@@ -44,7 +45,8 @@ public class BaseTest {
         logger.info("//==================================================");
         
 		homePage = new HomePage(driver);
-		homePage.open();
+		driver.get(ConfigReader.getBaseUrl());
+		homePage.open();		
 		testData=new TestData();
 	}
 
