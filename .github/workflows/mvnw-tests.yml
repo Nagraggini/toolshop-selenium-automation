@@ -2,38 +2,91 @@ name: Run Selenium Tests
 
 on:
   push:
+    branches: [main]
   pull_request:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
-  tests:
+  selenium-tests:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Selenium test project
         uses: actions/checkout@v4
 
-      - name: Set up JDK 21
+      - name: Checkout Practice Software Testing application
+        uses: actions/checkout@v4
+        with:
+          repository: testsmith-io/practice-software-testing
+          path: practice-software-testing
+
+      - name: Set up Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "21"
           cache: maven
 
-      - name: Make mvnw executable
-        run: chmod +x mvnw
-
-      - name: Show browser versions
+      - name: Start application
+        working-directory: practice-software-testing
         run: |
-          google-chrome --version || true
-          chromedriver --version || true
+          docker compose -f docker-compose.prod.yml up --pull missing -d
 
-      - name: Run Maven tests
-        run: ./mvnw -B clean test -DCI=true
+      - name: Wait for frontend and API
+        run: |
+          echo "Waiting for Practice Software Testing..."
 
-      - name: Upload Surefire reports
+          for attempt in {1..60}; do
+            FRONTEND_STATUS=$(curl --silent --output /dev/null \
+              --write-out "%{http_code}" \
+              http://localhost:4200 || true)
+
+            API_STATUS=$(curl --silent --output /dev/null \
+              --write-out "%{http_code}" \
+              http://localhost:8091 || true)
+
+            if [[ "$FRONTEND_STATUS" =~ ^(200|301|302)$ ]] &&
+               [[ "$API_STATUS" =~ ^(200|301|302)$ ]]; then
+              echo "Application is ready."
+              exit 0
+            fi
+
+            echo "Attempt $attempt/60 - frontend: $FRONTEND_STATUS, API: $API_STATUS"
+            sleep 5
+          done
+
+          echo "Application did not become ready."
+          docker compose \
+            -f practice-software-testing/docker-compose.prod.yml \
+            logs
+          exit 1
+
+      - name: Run Selenium tests
+        env:
+          BASE_URL: http://localhost:4200
+          HEADLESS: "true"
+        run: ./mvnw --batch-mode clean test
+
+      - name: Show Docker logs after failure
+        if: failure()
+        working-directory: practice-software-testing
+        run: docker compose -f docker-compose.prod.yml logs --no-color
+
+      - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: surefire-reports
-          path: target/surefire-reports
+          name: selenium-test-results
+          path: |
+            target/surefire-reports/
+            target/screenshots/
+            target/logs/
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Stop application
+        if: always()
+        working-directory: practice-software-testing
+        run: docker compose -f docker-compose.prod.yml down --volumes
