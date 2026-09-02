@@ -2,79 +2,115 @@ name: Run Selenium Tests
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+
   pull_request:
-    branches: [main]
+    branches:
+      - main
+
   workflow_dispatch:
 
 jobs:
   selenium-tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
 
     steps:
-      - name: Checkout Selenium test project
+      # Saját Selenium-projekt letöltése
+      - name: Checkout Selenium project
         uses: actions/checkout@v4
 
-      - name: Checkout Practice Software Testing application
+      # A tesztelt alkalmazás letöltése külön könyvtárba
+      - name: Checkout Practice Software Testing
         uses: actions/checkout@v4
         with:
           repository: testsmith-io/practice-software-testing
           path: practice-software-testing
 
-      - name: Set up Java
+      # Java 21 beállítása
+      - name: Set up Java 21
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "21"
           cache: maven
 
-      - name: Start application
+      # Chrome verzió kiírása
+      - name: Show Chrome version
+        run: google-chrome --version
+
+      # Maven Wrapper futtathatóvá tétele
+      - name: Make Maven Wrapper executable
+        run: chmod +x mvnw
+
+      # Docker-környezet elindítása
+      - name: Start Practice Software Testing
         working-directory: practice-software-testing
         run: |
-          docker compose -f docker-compose.prod.yml up --pull missing -d
+          docker compose -f docker-compose.prod.yml pull
+          docker compose -f docker-compose.prod.yml up -d
+          docker compose -f docker-compose.prod.yml ps
 
-      - name: Wait for frontend and API
+      # Várakozás a frontend betöltésére
+      - name: Wait for application
         run: |
           echo "Waiting for Practice Software Testing..."
 
           for attempt in {1..60}; do
-            FRONTEND_STATUS=$(curl --silent --output /dev/null \
+            FRONTEND_STATUS=$(curl \
+              --silent \
+              --output /dev/null \
               --write-out "%{http_code}" \
               http://localhost:4200 || true)
 
-            API_STATUS=$(curl --silent --output /dev/null \
-              --write-out "%{http_code}" \
-              http://localhost:8091 || true)
+            echo "Attempt $attempt/60 - frontend: $FRONTEND_STATUS"
 
-            if [[ "$FRONTEND_STATUS" =~ ^(200|301|302)$ ]] &&
-               [[ "$API_STATUS" =~ ^(200|301|302)$ ]]; then
-              echo "Application is ready."
+            if [[ "$FRONTEND_STATUS" == "200" ]]; then
+              echo "Application frontend is ready."
               exit 0
             fi
 
-            echo "Attempt $attempt/60 - frontend: $FRONTEND_STATUS, API: $API_STATUS"
             sleep 5
           done
 
           echo "Application did not become ready."
+
           docker compose \
             -f practice-software-testing/docker-compose.prod.yml \
-            logs
+            ps
+
+          docker compose \
+            -f practice-software-testing/docker-compose.prod.yml \
+            logs --no-color
+
           exit 1
 
+      # Selenium-tesztek futtatása a lokális alkalmazás ellen
       - name: Run Selenium tests
         env:
           BASE_URL: http://localhost:4200
           HEADLESS: "true"
-        run: ./mvnw --batch-mode clean test
+        run: |
+          ./mvnw \
+            --batch-mode \
+            -Dbase.url=http://localhost:4200 \
+            clean test
 
+      # Docker állapot kiírása, ha valami elhasal
+      - name: Show Docker container status after failure
+        if: failure()
+        working-directory: practice-software-testing
+        run: docker compose -f docker-compose.prod.yml ps
+
+      # Docker-logok kiírása hiba esetén
       - name: Show Docker logs after failure
         if: failure()
         working-directory: practice-software-testing
         run: docker compose -f docker-compose.prod.yml logs --no-color
 
-      - name: Upload test results
+      # Selenium teszteredmények mentése
+      - name: Upload Selenium test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -86,7 +122,11 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
 
-      - name: Stop application
+      # Docker-környezet leállítása
+      - name: Stop Practice Software Testing
         if: always()
         working-directory: practice-software-testing
-        run: docker compose -f docker-compose.prod.yml down --volumes
+        run: |
+          docker compose -f docker-compose.prod.yml down \
+            --volumes \
+            --remove-orphans
