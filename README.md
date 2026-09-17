@@ -1,27 +1,26 @@
-# vizsgaremek-fa-260117
+# Toolshop Selenium Automation
 
-Készítette: Freud Andrea
+Tested web application: https://practicesoftwaretesting.com/
 
-Tesztelt webalkalmazás: [https://practicesoftwaretesting.com/](https://practicesoftwaretesting.com/)
+# Execution
 
-Futattás:
-linux-on és macOS-en: `./mvnw clean test`
+On Linux and macOS: `./mvnw clean test`
 
-windows-on: `mvnw clean test`
+On Windows: `mvnw clean test`
 
 # Tech Stack
 
-- Java 21;
-- Maven;
-- JUnit 5;
-- Selenium WebDriver a UI tesztek készítéséhez;
-- Page Object Model tervezési minta;
-- Log4j a loggoláshoz (mentési helye: target/logs/test-execution.log);
-- Git/GitHub a verziókezeléshez.
-- A GitHub Actions futtatása során a teszteltoldal Cloudflare botvédelme miatt a tesztek nem futnak le, viszont helyi környezetben a tesztek sikeresen végrehajthatóak.
+* Java 21;
+* Maven;
+* JUnit 5;
+* Selenium WebDriver for creating UI tests;
+* Page Object Model design pattern;
+* Log4j for logging (log file location: `target/logs/test-execution.log`);
+* Git/GitHub for version control.
+* When running the tests through GitHub Actions, the tests fail to execute due to the Cloudflare bot protection on the tested website. However, the tests execute successfully in a local environment.
 
-# Jelentés letöltése
+# Downloading the Report
 
-Az jelentés megtalálható a GitHub-on az Actions fülön, ha az adott workflow-ra kattintunk lejebb görgetünk az Artifacts részen letölthető a `surfire-reports` egy zip-ben. 
+The report can be found on GitHub under the **Actions** tab. Click on the relevant workflow, scroll down to the **Artifacts** section, and download `surefire-reports` as a ZIP file.
 
-Valamint offline a tesztek futtatása után a target mappában is megtalálható a `surefire-reports`.
+The `surefire-reports` folder is also available offline in the `target` directory after running the tests.
